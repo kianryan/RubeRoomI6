@@ -1,0 +1,152 @@
+!============================================================================
+Constant Story "Rube  Room";
+Constant Headline
+    "^The Rube Room
+    ^by Kian Ryan.^";
+Release 1; Serial "201110";
+! for keeping track of public releases
+! Constant MAX_SCORE = 4;
+Include "Parser";
+
+replace FillSub;
+Include "VerbLib";
+
+!============================================================================
+! Object classes
+Class Room
+    with description "UNDER CONSTRUCTION",
+    has light;
+
+Class Prop
+    with description "WORKING ON IT",
+    has scenery;
+
+Room water_room "The Water Room"
+    with description
+        "You hear the water before you enter the room.  As you walk in to the
+        room, you see the water falling from a waterfall in to a small rock
+        pool below.";
+
+Prop waterfall "Waterfall" water_room
+    with name 'waterfall'
+    with description
+        "The water is coming from between the rocks in the darkness above
+        and drops with a roaring flourish.  It's forcefull, but has an elegant
+        calm to it.";
+
+Attribute fillable; ! A container that can be filled
+Attribute liquid; ! Contains an infinite liquid that can be used to fill a fillable
+
+Prop rockpool "Rock Pool" water_room
+    with name 'rock' 'pool' 'pond',
+    with description
+        "As you peer in to the rock pool you can't tell how deep it goes.  The
+        light fades away in to nothingness.  What you can see is absolutely clear
+        and beautiful.  There is no life in the pool.  The rocks are dark and
+        volcanic, and would cut you in you ventured in."
+    has liquid;
+
+Class Amphora
+    with name 'amphora' 'jug' 'bucket' 'vase',
+        description [;
+            print "A roman styled amphora.  It holds exactly ", self.volume, " litres.^";
+            if (self.contents == 0)
+                print_ret "You peer inside, there's not a drop to be seen.";
+            if (self.contents >= self.volume)
+                print_ret "The amphora is full to the brim.";
+            else
+                print_ret "Some liquid sloshes around inside, but you can't tell how much.";
+        ],
+        volume 5,
+        contents 0,
+   has fillable;
+
+Amphora "large amphora" water_room
+    with name 'large'
+    with volume 5;
+
+Amphora "small amphora" water_room
+    with name 'small'
+    with volume 3;
+
+Object scale "scale" water_room
+    with name 'scale' 'scales',
+    with capacity 1,
+    with description [weighing;
+        print "A pair of elegant brass scales.^";
+        weighing = child(self);
+        if (weighing == nothing) print_ret "There is nothing on the scale";
+        if (weighing.contents > self.balance) print_ret "The scale tips heavy";
+        if (weighing.contents < self.balance) print_ret "The scale tips light";
+        print_ret "The scale is perfectly balanced";
+    ],
+        balance 4,
+        puzzle_scored false,
+        after [;
+            Receive:
+                if (noun hasnt fillable) {
+                    move noun to player;
+                    print_ret "That doesn't fit on the scales";
+                }
+                if (noun.contents > self.balance) print_ret "The scale wobbles and tips heavy.";
+                if (noun.contents < self.balance) print_ret "The scale wobbles and tips light.";
+                print "The scale wobbles for a seconds and eventually settles perfectly balanced.^";
+                if (self.puzzle_scored == false) {
+                    self.puzzle_scored = true;
+                    score = score + 1;
+                }
+                return true;
+        ],
+   has static supporter;
+
+!============================================================================
+! Entry point routines
+[ Initialise;
+    location = water_room;
+    ! lookmode = 2;
+    ! like the VERBOSE command
+];
+
+
+! Standard and extended grammar
+Include "Grammar";
+!============================================================================
+
+Extend 'fill' replace
+    * -> Fill
+    * noun -> Fill
+    * noun noun -> Fill
+    * noun 'from'/'with' noun -> Fill;
+
+[FillSub space available;
+    if (noun == nothing) print_ret "What do you intend to fill?";
+    if (second == nothing) print_ret "Where do you intend to fill from?";
+    if (noun hasnt fillable) print_ret "How do you expect to fill that?";
+    if (second hasnt liquid or fillable) print_ret "You can't fill from here.";
+
+    if (second has fillable) {
+        space = noun.volume - noun.contents;
+        available = space;
+        if (second.contents < space) available = second.contents;
+
+        noun.contents = noun.contents + available;
+        second.contents = second.contents - available;
+    }
+    else
+        noun.contents = noun.volume;
+
+    print_ret "You fill ", (the) noun, " from ", (the) second, ".";
+];
+
+[PourSub;
+    if (noun == nothing) print_ret "What do you intend to pour?";
+    if (noun hasnt fillable) print_ret "What do you intend to pour?";
+
+    noun.contents = 0;
+    print_ret "You pour the contents of ", (the) noun, " on to the ground.^
+        It's now empty.";
+];
+
+Verb 'pour' 'spill'
+    * -> Pour
+    * noun -> Pour;
