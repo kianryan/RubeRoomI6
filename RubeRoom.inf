@@ -14,14 +14,30 @@ Include "VerbLib";
 !============================================================================
 ! Functions
 
+! Toggle adjacent lanterns on or off.
 [
-    Ordinal o;
-    switch (o) {
+    Toggle lantern;
+    if (lantern has light) {
+        give lantern ~light;
+        lantern.short_name();
+        print_ret " goes out!";
+    }
+    if (lantern hasnt light) {
+        give lantern light;
+        lantern.short_name();
+        print_ret " bursts in to flames!";
+    }
+];
+
+[
+    Ordinal idx;
+    switch (idx) {
         1: print "first";
         2: print "second";
         3: print "third";
         4: print "fourth";
         5: print "fifth";
+        default: print idx, "th";
     }
     rtrue;
 ];
@@ -127,8 +143,7 @@ Room fire_room "The Fire Cave"
 Class Lantern
     with name 'lantern' 'lamp',
        short_name [;
-           Ordinal(self.index);
-           print " lantern";
+           print (ordinal) self.index, " lantern";
            if (self has light) {
                print " (lit)";
            }
@@ -149,14 +164,21 @@ Class Lantern
             if (self has light) print_ret "Why, it's already lit?";
             if (match in player && second == match) {
                 give self light;
-                print_ret "It takes a second, but the wick eventually takes the flame.";
+                print "It takes a second, but the wick eventually takes the flame.^";
+                Toggle(self.left);
+                Toggle(self.right);
+                rtrue;
+
             }
             print_ret "Light with what?";
         Snuff:
             if (self hasnt light) print_ret "Why, it's already out?";
             if (snuff in player && second == snuff) {
                 give self ~light;
-                print_ret "You douse the flame, and room becomes a little darker.";
+                print "You douse the flame, and room becomes a little darker.^";
+                Toggle(self.left);
+                Toggle(self.right);
+                rtrue;
             }
             print_ret "Snuff with what?";
         ],
