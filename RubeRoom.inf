@@ -12,6 +12,21 @@ replace FillSub;
 Include "VerbLib";
 
 !============================================================================
+! Functions
+
+[
+    Ordinal o;
+    switch (o) {
+        1: print "first";
+        2: print "second";
+        3: print "third";
+        4: print "fourth";
+        5: print "fifth";
+    }
+    rtrue;
+];
+
+!============================================================================
 ! Object classes
 Class Room
     with description "UNDER CONSTRUCTION",
@@ -99,10 +114,104 @@ Object scale "scale" water_room
         ],
    has static supporter;
 
+! Puzzle description - Attempt to light the lantern with the match.
+! If you light one lantern, the two adjacent go out.  The aim is to light
+! All of the lanterns.
+
+Room fire_room "The Fire Cave"
+    with description "The walls are bare, but warm to the touch.  As you take a closer
+    look at the walls, you realise the rock here is different, possibly volcanic.  You
+    run your hand over and almost cut yourself on the sharp edges.  In the centre of the
+    room are five lanterns in a line.";
+
+Class Lantern
+    with name 'lantern' 'lamp',
+       short_name [;
+           Ordinal(self.index);
+           print " lantern";
+           if (self has light) {
+               print " (lit)";
+           }
+           return true;
+       ],
+       description [;
+            print "A brass open cage holds an oiled wick.  You can smell the oil on the wick
+            from a distance.^";
+            if (self has light)
+                print_ret "The lantern is lit with a modest flame that partially lights a
+                section of the cave.  As the light dances, shadows play on the walls.";
+            else
+                print_ret "The lantern gives off no light.  It is warm to the touch and you
+                can smell the oil on the wick.";
+        ],
+        before[;
+        Burn:
+            if (self has light) print_ret "Why, it's already lit?";
+            if (match in player && second == match) {
+                give self light;
+                print_ret "It takes a second, but the wick eventually takes the flame.";
+            }
+            print_ret "Light with what?";
+        Snuff:
+            if (self hasnt light) print_ret "Why, it's already out?";
+            if (snuff in player && second == snuff) {
+                give self ~light;
+                print_ret "You douse the flame, and room becomes a little darker.";
+            }
+            print_ret "Snuff with what?";
+        ],
+
+    has static;
+
+! This may work with an array.
+
+Lantern lantern1 fire_room
+    with name 'first',
+    with index 1,
+    with left lantern5,
+    with right lantern2,
+    has light;
+Lantern lantern2 fire_room
+    with name 'second',
+    with index 2,
+    with left lantern1,
+    with right lantern3,
+    has light;
+Lantern lantern3  fire_room
+    with name 'third',
+    with index 3,
+    with left lantern2,
+    with right lantern4,
+    has light;
+Lantern lantern4 fire_room
+    with name 'fourth',
+    with index 4,
+    with left lantern3,
+    with right lantern5;
+Lantern lantern5 fire_room
+    with name 'fifth',
+    with index 5,
+    with left lantern4,
+    with right lantern1;
+
+! Magic match depends on if it's being held.
+! It will not burn the user, but whilst being held, it will always be lit.
+Object match "match" fire_room
+    with name 'match',
+    with description
+        "It's a match.";
+
+Object snuff "snuff" fire_room
+    with name 'snuff' 'hood',
+    with description
+        "A plain brass snuff, with a long handle, used for extingusing lights.  The inside of the hood
+        is sooted from use.";
+
+
 !============================================================================
 ! Entry point routines
 [ Initialise;
-    location = water_room;
+    location = fire_room;
     ! lookmode = 2;
     ! like the VERBOSE command
 ];
@@ -150,3 +259,15 @@ Extend 'fill' replace
 Verb 'pour' 'spill'
     * -> Pour
     * noun -> Pour;
+
+[SnuffSub;
+    print_ret "Well, that doesn't need extinguising.";
+];
+
+Verb 'snuff' 'extinguish' 'put out' 'douse'
+    * -> Snuff
+    * noun -> Snuff
+    * noun 'with'/'using' noun -> Snuff;
+
+
+
