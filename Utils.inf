@@ -1,0 +1,12 @@
+[
+    Ordinal idx;
+    switch (idx) {
+        1: print "first";
+        2: print "second";
+        3: print "third";
+        4: print "fourth";
+        5: print "fifth";
+        default: print idx, "th";
+    }
+    rtrue;
+];

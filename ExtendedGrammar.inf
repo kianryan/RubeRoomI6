@@ -1,0 +1,47 @@
+Extend 'fill' replace
+    * -> Fill
+    * noun -> Fill
+    * noun noun -> Fill
+    * noun 'from'/'with' noun -> Fill;
+
+[FillSub space available;
+    if (noun == nothing) print_ret "What do you intend to fill?";
+    if (second == nothing) print_ret "Where do you intend to fill from?";
+    if (noun hasnt fillable) print_ret "How do you expect to fill that?";
+    if (second hasnt liquid or fillable) print_ret "You can't fill from here.";
+
+    if (second has fillable) {
+        space = noun.volume - noun.contents;
+        available = space;
+        if (second.contents < space) available = second.contents;
+
+        noun.contents = noun.contents + available;
+        second.contents = second.contents - available;
+    }
+    else
+        noun.contents = noun.volume;
+
+    print_ret "You fill ", (the) noun, " from ", (the) second, ".";
+];
+
+[PourSub;
+    if (noun == nothing) print_ret "What do you intend to pour?";
+    if (noun hasnt fillable) print_ret "What do you intend to pour?";
+
+    noun.contents = 0;
+    print_ret "You pour the contents of ", (the) noun, " on to the ground.^
+        It's now empty.";
+];
+
+Verb 'pour' 'spill'
+    * -> Pour
+    * noun -> Pour;
+
+[SnuffSub;
+    print_ret "Well, that doesn't need extinguising.";
+];
+
+Verb 'snuff' 'extinguish' 'put out' 'douse'
+    * -> Snuff
+    * noun -> Snuff
+    * noun 'with'/'using' noun -> Snuff;

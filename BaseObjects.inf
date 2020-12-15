@@ -1,0 +1,25 @@
+!============================================================================
+! Object classes
+Class Room
+    with description "UNDER CONSTRUCTION",
+    has light;
+
+Class PuzzleRoom
+    with description "UNDER CONSTRUCTION",
+    with room_scored false,
+    with win_description "ROOM HAS BEEN WON",
+    with win_room [;
+        ! Room may only be won once, even if
+        ! objective is re-reached.
+        if (self.room_scored == false) {
+            self.room_scored = true;
+            score = score + 1;
+            self.win_description();
+        }
+        rtrue;
+    ],
+    has light;
+
+Class Prop
+    with description "WORKING ON IT",
+    has scenery;
