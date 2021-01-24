@@ -1,0 +1,49 @@
+PuzzleRoom earth_room "The Earth Room"
+    with description[;
+        print "This large cavern is covered in a vast array of green and luscious plant
+        life.  Natural light floods in from a hole in the top of cavern, bringing a
+        vibrancy to unexpected waves of colours in the room.  In the centre, a ring
+        of boulders provides a convenient place to rest oneself while taking in the
+        spendlours of the plant life. ";
+
+        if (parent(troll) == self)
+            print "^^Sat on one of the boulders, hunched over himself and head resting
+            on a closed fist, is what appears to be a abstract, rocky human statue.";
+        ];
+
+Prop boulder "Boulder" earth_room
+    with name 'boulder',
+    with description
+        "A ring of boulders sits in the middle of the room.  They're well sized
+        to sit on, and the small indents in the middle hint that that's what
+        they've been used for for a long time.",
+    has pluralname;
+
+!============================================================================
+! NPC
+Class NPC
+    with life [;
+        Answer, Ask, Order, Tell:
+            print_ret "Just use T[alk] [to ", (the) self, "].";
+        ],
+    has animate;
+
+NPC troll "Rodin" earth_room
+    with name 'rodin' 'troll' 'rocky' 'statue',
+        description
+            "Towering twice the size of a man, and made from what looks like loosely
+            pieces of held together rock, a troll sits on one of the boulders in the
+            middle of this cavern.  Every so often he sighs to himself.",
+        initial [;
+            print "^The statue slowly tilts his head and gives you a surprisingly deep look.^";
+            if (location hasnt visited) {
+                print "^U. ME. RODIN.^^
+                THOUGHT DEEP. DEEP THOUGHT. SSH.^^";
+            }
+        ],
+    has male proper;
+
+
+
+
+

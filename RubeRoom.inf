@@ -18,11 +18,12 @@ Include ">BaseObjects";
 Include ">FireRoom";
 Include ">WaterRoom";
 Include ">AirRoom";
+Include ">EarthRoom";
 
 !============================================================================
 ! Entry point routines
 [ Initialise;
-    location = air_room;
+    location = earth_room;
     ! lookmode = 2;
     ! like the VERBOSE command
 
