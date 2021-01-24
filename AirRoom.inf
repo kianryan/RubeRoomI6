@@ -1,0 +1,59 @@
+PuzzleRoom air_room "The Air Room"
+    with description
+    "This cavern is slippery underfoot, feels possibly like limestone.  The cavern
+    is nearly smooth from erosion apart from the a single shaft of light that emeges
+    from a crack running from the base to the roof of one wall.  At the base of the
+    wall a clump of rushes is growing from between the crack and gently rocks in the
+    breeze eminating from the thin gap.";
+
+Prop gap "Gap" air_room
+    with name 'thin' 'gap' 'crevice',
+    with description
+        "The thin gap in the rock runs from the base to the roof this room.
+        There's a breeze coming through the gap and it feels refreshing against your
+        skin.  There's something odd about the breeze, but you can't put your finger on it.
+        You can just about get your finger in the gap, but no more.  It looks like the gap
+        leads somewhere.";
+
+Object knife "Knife" air_room
+    with name 'knife' 'penknife',
+        cutter 1,
+        description
+        "A small folding knife with a bone handle and a hardened steel blade.  The blade
+        is only a few inches in length, put is practical for a range of jobs.";
+
+! The rush needs to be cut to length 3 to find the right pitch.
+! It will be possible to over cut the reed.
+
+Object rush "rush"
+    with name 'rush' 'reed',
+        description
+        "A singular hollow rush you took from the clump at the bottom of the gap.  It's shaft
+        is long and sturdy.",
+        length 5,
+        cuttable 1,
+    before [;
+        Cut:
+            if (self.length == 1) {
+                remove rush;
+                print_ret "There's so little of the reed to cut, you discard the remainder
+                away.";
+            }
+            self.length = self.length - 1;
+        Blow:
+            if (self.length > 3) print_ret "You blow a shrill note, your teeth rattle.";
+            if (self.length < 3) print_ret "You blow a deep note, and the back of your head aches.";
+            print_ret "You blow a beautiful note, that resonates with the cave walls.  They sing to you in response.";
+    ];
+
+Prop Rushes "Rushes" air_room
+    with name 'rushes' 'reeds',
+         description
+        "The clump of rushes grow at the base of the gap in the rock.  They are many,
+        grow strong, healthy and have a thick shaft.",
+    before [;
+        Take:
+            move rush to player;
+            rush.length = 5; ! reset length of rush
+            print_ret "You take a rush";
+        ];

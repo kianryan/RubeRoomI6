@@ -8,18 +8,20 @@ Release 1; Serial "201110";
 ! Constant MAX_SCORE = 4;
 Include "Parser";
 
-replace FillSub;
+Replace FillSub;
+Replace CutSub;
 Include "VerbLib";
 
 Include ">Utils";
 Include ">BaseObjects";
 Include ">FireRoom";
 Include ">WaterRoom";
+Include ">AirRoom";
 
 !============================================================================
 ! Entry point routines
 [ Initialise;
-    location = fire_room;
+    location = air_room;
     ! lookmode = 2;
     ! like the VERBOSE command
 ];

@@ -45,3 +45,19 @@ Verb 'snuff' 'extinguish' 'put out' 'douse'
     * -> Snuff
     * noun -> Snuff
     * noun 'with'/'using' noun -> Snuff;
+
+[CutSub;
+    if (~~(noun provides cuttable && noun.cuttable))
+        return L__M(##Cut,1,noun);
+    if (second) {
+        if (~~(second provides cutter && second.cutter))
+            print_ret (The) second, " can't cut anything.";
+    }
+    else
+        "You need to specify a sharp implement.";
+    if (AfterRoutines() || keep_silent) rtrue;
+    "You make a small incision in ", (the) noun, ".";
+];
+
+Extend 'cut'
+    * noun 'with' noun  -> Cut;
