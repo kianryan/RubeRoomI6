@@ -61,3 +61,19 @@ Verb 'snuff' 'extinguish' 'put out' 'douse'
 
 Extend 'cut'
     * noun 'with' noun  -> Cut;
+
+[BlowSub;
+    if (~~(noun has blowable))
+        return L__M(##Blow,1,noun);
+    if (second) {
+        if (~~(second has blow_target))
+            print_ret "Not sure why you would want to blow at that.";
+    }
+    else
+        "You whistle a pleasant tune.";
+    if (AfterRoutines() || keep_silent) rtrue;
+    "You blow ", (the) noun, " at ", (the) second, ".";
+];
+
+Extend 'blow'
+    * noun 'at'/'in'/'towards' noun -> Blow;

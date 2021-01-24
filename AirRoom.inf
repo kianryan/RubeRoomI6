@@ -1,10 +1,16 @@
+Attribute blowable;
+Attribute blow_target;
+
 PuzzleRoom air_room "The Air Room"
     with description
-    "This cavern is slippery underfoot, feels possibly like limestone.  The cavern
-    is nearly smooth from erosion apart from the a single shaft of light that emeges
-    from a crack running from the base to the roof of one wall.  At the base of the
-    wall a clump of rushes is growing from between the crack and gently rocks in the
-    breeze eminating from the thin gap.";
+        "This cavern is slippery underfoot, feels possibly like limestone.  The cavern
+        is nearly smooth from erosion apart from the a single shaft of light that emeges
+        from a crack running from the base to the roof of one wall.  At the base of the
+        wall a clump of rushes is growing from between the crack and gently rocks in the
+        breeze eminating from the thin gap.",
+        win_description
+        "The note from your impromtu pipe resonates with the room and the gap opens up,
+        revealing a small room just beyond.";
 
 Prop gap "Gap" air_room
     with name 'thin' 'gap' 'crevice',
@@ -40,11 +46,22 @@ Object rush "rush"
                 away.";
             }
             self.length = self.length - 1;
+            print_ret "Taking your knife, you cut a length from the end.  Your reed is now shorter.";
         Blow:
+            if (second == gap) {
+                print "You place the end the reed into the gap.^";
+            }
             if (self.length > 3) print_ret "You blow a shrill note, your teeth rattle.";
             if (self.length < 3) print_ret "You blow a deep note, and the back of your head aches.";
-            print_ret "You blow a beautiful note, that resonates with the cave walls.  They sing to you in response.";
-    ];
+            if (self.length == 3) {
+                print "You blow a beautiful note, that resonates with the cave walls.";
+            }
+           if (second == gap) {
+               air_room.win_room();
+           }
+           rtrue;
+    ],
+    has blowable;
 
 Prop Rushes "Rushes" air_room
     with name 'rushes' 'reeds',

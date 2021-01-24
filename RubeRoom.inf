@@ -10,6 +10,7 @@ Include "Parser";
 
 Replace FillSub;
 Replace CutSub;
+Replace BlowSub;
 Include "VerbLib";
 
 Include ">Utils";
@@ -24,6 +25,8 @@ Include ">AirRoom";
     location = air_room;
     ! lookmode = 2;
     ! like the VERBOSE command
+
+    move knife to player;
 ];
 
 ! Standard and extended grammar
