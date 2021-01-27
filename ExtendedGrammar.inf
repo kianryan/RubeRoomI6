@@ -86,4 +86,14 @@ Extend 'blow'
 ];
 
 Verb 'greet' 'hello'
-    * noun -> Greet;
+    * creature -> Greet;
+
+[TalkSub;
+    if (noun == player) print_ret "Nothing you hear surprises you.";
+    if (RunLife(noun,##Talk) ~= false) return;      ! Adds the talk action to the NPC life property.
+    print_ret "At the moment, you can't think of anything to say.";
+];
+
+Verb 'talk' 't//' 'converse' 'chat' 'gossip'
+    * 'to'/'with' creature  -> Talk
+    * creature -> Talk;

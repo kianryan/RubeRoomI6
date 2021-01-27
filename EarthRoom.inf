@@ -23,8 +23,7 @@ Prop boulder "Boulder" earth_room
 ! NPC
 Class NPC
     with life [;
-        Answer, Ask, Order, Tell:
-            print_ret "Just use T[alk] [to ", (the) self, "].";
+        Ask, Order : print_ret "Use either Talk or Answer";
         ],
     has animate;
 
@@ -41,9 +40,44 @@ NPC troll "Rodin" earth_room
                 THOUGHT DEEP. DEEP THOUGHT. SSH.^^";
             }
         ],
+        life [;
+            Talk:
+                if (~~(self.greeted)) "U RUDE."; ! don't be rude.
+                if (self.long_intro) {
+                    print "I BEEN HERE LONG TIME.^
+                    WIZARD ASKED TO THINK ON BIG PROBLEM. ^
+                    NO GO UNTIL PROBLEM SOLVED. ^
+^
+                    (You notice there's moss reaching from the bottom^
+                    of his feet spreading to floor around him.)^^";
+                    self.long_intro = false;
+                }
+                else {
+                    print "The troll clears his throat.^^";
+                }
+                print_ret "The troll carefully unfurls a rolled up piece
+                of parchment held in his hand, furls his brow and slowly
+                reads the words out to you.^
+                ^
+                'SAI MAI NAME UND I DIS-APP-EAR. WOT AM I?'^
+                ^
+                The troll carefully rolls up the parcement again and
+                keeps careful hold of it.";
+            Answer:
+                if (~~(self.greeted)) "U RUDE."; ! don't be rude.
+                if (self.long_intro) {
+                    print "WAT";
+                }
+                if (noun == 'silence') {
+                    print "'HEH.'^
+                    ^
+                    The troll disappears in a cloud along with the silence.
+                    A key is left behind on the rock where he was sat.";
+                    remove self;
+                    earth_room.win_room();
+                }
+                "The troll looks at you quizzacly, but nothing happens.";
+           ],
+    with long_intro true,
     with greeted false, ! you must greet first.
     has male proper;
-
-
-
-
