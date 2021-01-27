@@ -41,8 +41,8 @@ NPC troll "Rodin" earth_room
                 THOUGHT DEEP. DEEP THOUGHT. SSH.^^";
             }
         ],
+    with greeted false, ! you must greet first.
     has male proper;
-
 
 
 
