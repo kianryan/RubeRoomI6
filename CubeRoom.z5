@@ -1,0 +1,8 @@
+PuzzleRoom water_room "The Water Room"
+    with description
+        "You hear the water before you enter the room.  As you walk in to the
+        room, you see the water falling from a waterfall in to a small rock
+        pool below.",
+    with win_description
+        "WELL, LOOKS LIKE WE'RE GOING TO DESCRIBE A RUBE GOLDBERG MACHINE.";
+

@@ -15,6 +15,7 @@ Include "VerbLib";
 
 Include ">Utils";
 Include ">BaseObjects";
+Include ">CubeRoom";
 Include ">FireRoom";
 Include ">WaterRoom";
 Include ">AirRoom";
@@ -23,11 +24,15 @@ Include ">EarthRoom";
 !============================================================================
 ! Entry point routines
 [ Initialise;
-    location = earth_room;
+    location = cube_room;
     ! lookmode = 2;
     ! like the VERBOSE command
 
     move knife to player;
+    move air_key to player;
+    move earth_key to player;
+    move fire_key to player;
+    move water_key to player;
 ];
 
 ! Standard and extended grammar

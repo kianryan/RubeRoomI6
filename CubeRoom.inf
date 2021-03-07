@@ -1,0 +1,106 @@
+PuzzleRoom cube_room "The Cube Room"
+    with description
+        "A central atrium carved from the rock houses an intricate machine roughly
+        shaped in to a cube made from brass and gold.  The machine is about as high
+        and wide as a person.^^
+        The machine looks ... complicated. ^^
+        Passages in the rock lead off to the north, south, east and west.",
+        win_description
+        "WELL, LOOKS LIKE WE'RE GOING TO DESCRIBE A RUBE GOLDBERG MACHINE.";
+
+Class Key;
+
+Key air_key "umbrella"
+    with name 'umbrella' 'brolly',
+        description "A red and white striped umbrella.  A singular cog sits towards
+      the bottom of the shaft.";
+
+Key earth_key "steel marble"
+    with name 'marble' 'ball' 'steel',
+        description "A small perfectly smooth, surprisingly heavy, steel marble.";
+
+Key fire_key "flint cog"
+    with name 'flint',
+        desciption "It's a little rough, but it's definately cog shaped.  As you pass
+    it though your fingers, the texture is slightly coarse, and sharp at the edges.
+    Is it flint?";
+
+Key water_key "tiny boat"
+    with name 'boat' 'benchy',
+        description "It's a tiny boat.  Made of a very light wood, it's even got a
+    tiny wooden sail.";
+
+!  We need to ensure that keys are placed in the right spots on
+!  each side.
+!  We then open the umbrella to turn it and kick the machine off...
+! Oh, is each face actually it's own item?
+! That would work quite nicely, then each face is it's own test.
+
+Prop machine "Machine" cube_room
+    with name 'machine' 'cube',
+        description
+        "You take a closer look at the machine in the center of the room.  It has
+        four sides (facing north, south, east and west), each tightly faced with
+        cogs, worm gears and drives.";
+
+Class MachineFace
+    with description
+        [;
+            if (parent(self.right_key) == self) {
+                self.key_fitted();
+            } else {
+                self.no_key();
+           }
+        ],
+       after [;
+            Receive:
+                if (noun == self.right_key) {
+                    print_ret "That would certainly be the right key";
+                } else {
+                    move noun to player;
+                    print_ret "I can't work out how to fit that here.";
+                }
+        ],
+    has scenery container open;
+
+
+MachineFace north_face "North Face" cube_room
+    with name 'north' 'face' 'side' 'cube',
+        right_key air_key,
+        key_fitted "Looks like the key is fitted...",
+        no_key "The north side has a small round hole in the very centre of the cube.
+                One cog lines up close to the hole, with a number interfacing to a series
+                of screws cogs, and cams to transfer the power to the east side of the cube.";
+
+MachineFace east_face "East Face" cube_room
+   with name 'east' 'face' 'side' 'cube',
+        right_key earth_key,
+        key_fitted "Looks like the key is fitted...",
+        no_key "The east side of the cube consists of a series of tilted brass tubes
+                running from the top of the cube to around the mid point.  The very top
+                tube is completely flat with a hole at the beginning.  What appears to
+                be a tiny metal boot is lined up with the start of the tube, connected
+                to the gears coming from the north side.  The bottom of the tube turns
+                on to the south side.";
+
+MachineFace south_face "South Face" cube_room
+    with name 'south' 'face' 'side' 'cube',
+        right_key fire_key,
+        key_fitted "Looks like the key is fitted...",
+        no_key "On the south side the tube continues on the lower half of the machine.
+                There's a small opening at the mid way point of the tube, and a spindle
+                just above the opening to attach something to. Small steel cages around
+                the spindle are packed with dried straw.  Above the spindle is a spiral
+                of beautifully blown glass open at the top end, standing upright.  Water
+                sits inside the spiral.  At the top of the glass spiral, the glass tubing
+                turns straight and turns on the west side.";
+
+MachineFace west_face "West Face" cube_room
+    with name 'west' 'face' 'side' 'cube',
+        right_key water_key,
+        key_fitted "Looks like the key is fitted...",
+        no_key "On the west side the glass tubing stops suddenly before a tiny
+                gold windmill.  The windmill is at the very top of the cube out of your
+                reach and a single shaft extends down into a tub of water at the bottom.
+                There's a platform at the end of the tub of water, and the sides are
+                extended to quite a height.  You can't reach in to the water in the tub.";
