@@ -43,6 +43,20 @@ Prop machine "Machine" cube_room
         four sides (facing north, south, east and west), each tightly faced with
         cogs, worm gears and drives.";
 
+! Does each face in the room have a key?
+[
+    AllKey room a o;
+    a = true;
+    objectloop(o in room) {
+        if (o ofclass MachineFace) {
+            if (children(o) == 0)
+                a = false;
+        }
+    }
+    return a;
+];
+
+
 Class MachineFace
     with description
         [;
@@ -55,7 +69,11 @@ Class MachineFace
        after [;
             Receive:
                 if (noun == self.right_key) {
-                    print_ret "That would certainly be the right key";
+                    print "That would certainly be the right key^";
+
+                    score = score + 1;
+                    if (AllKey(cube_room)) print "Hey, all the keys are in!^";
+                    rtrue;
                 } else {
                     move noun to player;
                     print_ret "I can't work out how to fit that here.";
