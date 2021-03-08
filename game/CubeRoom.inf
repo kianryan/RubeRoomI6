@@ -18,12 +18,20 @@ PuzzleRoom cube_room "The Atrium"
         shaped in to a cube.  It's fashioned from components of brass and gold.  The machine
         is about as high and wide as a person.^^";
             if (self.room_scored == true) {
-                "The machine, now stands on stilts in the air.  The space below the machine
-                houses a staircase leading down...";
+                print "The machine, now stands on stilts in the air.  The space below the machine
+                houses a staircase leading down...^^";
             } else {
-                "The machine looks ... complicated. ^^
-                    Passages lead off to the north, south, east and west.";
+                print "The machine looks ... complicated.^^";
             }
+            print "Passages lead off to the ";
+            VorpleLinkCommand("north");
+            print ", ";
+            VorpleLinkCommand("south");
+            print ", ";
+            VorpleLinkCommand("east");
+            print " and ";
+            VorpleLinkCommand("west");
+            new_line;
         ],
         win_description
         [;

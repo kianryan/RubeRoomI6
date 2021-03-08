@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <title>Vorple</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" type="text/css" href="interpreter/roboto.css"> -->
+    <link rel="stylesheet" type="text/css" href="interpreter/jquery.powertip.css">
+    <link rel="stylesheet" type="text/css" href="interpreter/toastr.css">
+    <link rel="stylesheet" type="text/css" href="interpreter/vex.css">
+    <link rel="stylesheet" type="text/css" href="interpreter/vex-theme-plain.css">
+
+    <link rel="stylesheet" type="text/css" href="interpreter/haven.css">
+    <link rel="stylesheet" type="text/css" href="interpreter/vorple.css">
+</head>
+<body>
+<main id="haven">
+    <div id="loader">
+        <h2 id="loader-message">Loading scripts</h2>
+        <div id="spinner">V</div>
+    </div>
+</main>
+
+<script src="interpreter/vorple.min.js"></script>
+
+<script>
+    vorple.options = {
+        autosave: false,
+        engineColors: false,
+        // URL to the game file
+        story: "game/RubeRoom.ulx"
+    };
+
+    vorple.debug.off();
+    vorple.init();
+</script>
+</body>
+</html>

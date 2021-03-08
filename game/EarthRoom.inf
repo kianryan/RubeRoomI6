@@ -4,8 +4,11 @@ PuzzleRoom earth_room "Southern Cavern"
         life.  Natural light floods in from a hole in the top of cavern, bringing a
         vibrancy to unexpected waves of colours in the room.  In the centre, a ring
         of boulders provides a convenient place to rest oneself while taking in the
-        spendlours of the plant life. ^^
-        The passage to the north leads back to the atrium.^^";
+        spendlours of the plant life. ^^";
+
+        print "The paassage to the ";
+        VorpleLinkCommand("north");
+        print " leads back to the atrium.^^";
 
         if (parent(troll) == self)
             print "^^Sat on one of the boulders, hunched over himself and head resting

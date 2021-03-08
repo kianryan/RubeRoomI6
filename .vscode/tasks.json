@@ -6,7 +6,7 @@
         {
             "label": "Build RubeRoom",
             "type": "shell",
-            "command": "inform6 -SD -c -E1 /home/pi/projects/inform/RubeRoom/RubeRoom.inf",
+            "command": "inform6 -SD -c -E1 /home/pi/projects/inform/RubeRoom/game/RubeRoom.inf -G \\$MAX_STATIC_DATA=30000 \\$MAX_LABELS=12000",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

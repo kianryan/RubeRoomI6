@@ -16,9 +16,10 @@ PuzzleRoom air_room "Western Cavern"
                 westerly wall.^^";
             }
             print "At the base of the wall a clump of rushes is growing from between the crack
-                and gently rocks in the breeze eminating from the gap.^^
-                The passage to the east leads back to the atrium.^^";
-            rtrue;
+                and gently rocks in the breeze eminating from the gap.^^";
+            print "The paassage to the ";
+            VorpleLinkCommand("east");
+            print_ret " leads back to the atrium.^^";
         ],
        win_description
         [;

@@ -4,15 +4,19 @@ Constant Headline
     "^The Puzzle Cave
     ^by Kian Ryan.^";
 Constant MAX_SCORE 9;
-Release 1; Serial "20210308";
+Release 1; Serial "210308";
 ! for keeping track of public releases
 ! Constant MAX_SCORE = 4;
+
+Include "vorple.h";
 Include "Parser";
 
 Replace FillSub;
 Replace CutSub;
 Replace BlowSub;
 Include "VerbLib";
+
+Include "vorple-hyperlinks.h";
 
 Include ">Utils";
 Include ">BaseObjects";
@@ -40,13 +44,15 @@ Include ">EndRoom";
     ! move fire_key to player;
     ! move water_key to player;
 
-    "^^You fall from a hole in the ceiling and land with a dull thud on your posterior
+    print "^^You fall from a hole in the ceiling and land with a dull thud on your posterior
     on the cold cavern floor.  You were looking for a cave entrance, after being given
     some vague instructions by an old friend.  Promises of riches, puzzles,
     adventure.  The puzzles and adventure caught your attention more than the riches.
     As you were looking for the entrance, something gave way beneath your feet
     and the next thing you knew, you were here.  The cavern is dark, and cold, but there's
     just enough light to make out a large person sized cube in the middle of this space.^";
+
+    VorpleInitialise();
     ];
 
 ! Standard and extended grammar

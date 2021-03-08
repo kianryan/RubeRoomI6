@@ -27,11 +27,15 @@
 
 PuzzleRoom fire_room "Northern Cavern"
     with description
-        "The walls are bare, but warm to the touch.  As you take a closer
-        look at the walls, you realise the rock here is different, possibly volcanic.  You
-        run your hand over and almost cut yourself on the sharp edges.  In the centre of the
-        room are five lanterns in a line.^^
-        The paassage to the south leads back to the atrium.^^",
+        [;
+            print "The walls are bare, but warm to the touch.  As you take a closer
+            look at the walls, you realise the rock here is different, possibly volcanic.  You
+            run your hand over and almost cut yourself on the sharp edges.  In the centre of the
+            room are five lanterns in a line.^^";
+            print "The paassage to the ";
+            VorpleLinkCommand("south");
+            print_ret " leads back to the atrium.^^";
+        ],
         win_description
         [;
             move fire_key to self;

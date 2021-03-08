@@ -1,10 +1,14 @@
 PuzzleRoom water_room "Eastern Cavern"
     with description
-        "You hear the water before you enter the room.  As you walk in to the
-        room, you see the water falling from a waterfall in to a small rock
-        pool below.^^
-        The passage to the west leads back to the atrium.^^",
-    with win_description
+        [;
+            print "You hear the water before you enter the room.  As you walk in to the
+                room, you see the water falling from a waterfall in to a small rock
+                pool below.^^";
+            print "The paassage to the ";
+            VorpleLinkCommand("west");
+            print_ret " leads back to the atrium.^^";
+        ]
+   with win_description
     [;
         move water_key to water_room;
         "The scale wobbles for a few seconds and eventually settles perfectly balanced.  ^^
