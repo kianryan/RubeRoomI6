@@ -3,6 +3,7 @@ Constant Story "Rube  Room";
 Constant Headline
     "^The Rube Room
     ^by Kian Ryan.^";
+Constant MAX_SCORE 999;
 Release 1; Serial "201110";
 ! for keeping track of public releases
 ! Constant MAX_SCORE = 4;
@@ -20,6 +21,7 @@ Include ">FireRoom";
 Include ">WaterRoom";
 Include ">AirRoom";
 Include ">EarthRoom";
+Include ">EndRoom";
 
 !============================================================================
 ! Entry point routines

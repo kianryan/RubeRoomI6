@@ -23,3 +23,26 @@ Class PuzzleRoom
 Class Prop
     with description "WORKING ON IT",
     has scenery;
+
+Class Key;
+
+Key air_key "umbrella"
+    with name 'umbrella' 'brolly',
+        description "A red and white striped umbrella.  A singular cog sits towards
+      the bottom of the shaft.";
+
+Key earth_key "steel marble"
+    with name 'marble' 'ball' 'steel',
+        description "A small perfectly smooth, surprisingly heavy, steel marble.";
+
+Key fire_key "flint cog"
+    with name 'flint' 'cog' 'wheel',
+        desciption "It's a little rough, but it's definately cog shaped.  As you pass
+    it though your fingers, the texture is slightly coarse, and sharp at the edges.
+    Is it flint?";
+
+Key water_key "tiny boat"
+    with name 'boat' 'benchy',
+        description "It's a tiny boat.  Made of a very light wood, it's even got a
+    tiny wooden sail.";
+

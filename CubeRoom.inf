@@ -1,48 +1,3 @@
-PuzzleRoom cube_room "The Cube Room"
-    with description
-        "A central atrium carved from the rock houses an intricate machine roughly
-        shaped in to a cube made from brass and gold.  The machine is about as high
-        and wide as a person.^^
-        The machine looks ... complicated. ^^
-        Passages in the rock lead off to the north, south, east and west.",
-        win_description
-        "WELL, LOOKS LIKE WE'RE GOING TO DESCRIBE A RUBE GOLDBERG MACHINE.";
-
-Class Key;
-
-Key air_key "umbrella"
-    with name 'umbrella' 'brolly',
-        description "A red and white striped umbrella.  A singular cog sits towards
-      the bottom of the shaft.";
-
-Key earth_key "steel marble"
-    with name 'marble' 'ball' 'steel',
-        description "A small perfectly smooth, surprisingly heavy, steel marble.";
-
-Key fire_key "flint cog"
-    with name 'flint',
-        desciption "It's a little rough, but it's definately cog shaped.  As you pass
-    it though your fingers, the texture is slightly coarse, and sharp at the edges.
-    Is it flint?";
-
-Key water_key "tiny boat"
-    with name 'boat' 'benchy',
-        description "It's a tiny boat.  Made of a very light wood, it's even got a
-    tiny wooden sail.";
-
-!  We need to ensure that keys are placed in the right spots on
-!  each side.
-!  We then open the umbrella to turn it and kick the machine off...
-! Oh, is each face actually it's own item?
-! That would work quite nicely, then each face is it's own test.
-
-Prop machine "Machine" cube_room
-    with name 'machine' 'cube',
-        description
-        "You take a closer look at the machine in the center of the room.  It has
-        four sides (facing north, south, east and west), each tightly faced with
-        cogs, worm gears and drives.";
-
 ! Does each face in the room have a key?
 [
     AllKey room a o;
@@ -56,6 +11,36 @@ Prop machine "Machine" cube_room
     return a;
 ];
 
+PuzzleRoom cube_room "The Cube Room"
+    with description
+        "A central atrium carved from the rock houses an intricate machine roughly
+        shaped in to a cube made from brass and gold.  The machine is about as high
+        and wide as a person.^^
+        The machine looks ... complicated. ^^
+        Passages in the rock lead off to the north, south, east and west.",
+        win_description
+        "MECHANISM HAPPENS, STAIRCASE EXPOSED.",
+        n_to fire_room,
+        s_to earth_room,
+        e_to water_room,
+        w_to air_room,
+        d_to machine;
+
+!  We need to ensure that keys are placed in the right spots on
+!  each side.
+!  We then open the umbrella to turn it and kick the machine off...
+! Oh, is each face actually it's own item?
+! That would work quite nicely, then each face is it's own test.
+
+Prop machine "Machine" cube_room
+    with name 'machine' 'cube',
+        description
+        "You take a closer look at the machine in the center of the room.  It has
+        four sides (facing north, south, east and west), each tightly faced with
+        cogs, worm gears and drives.",
+    door_to bottom_staircase,
+    door_dir d_to,
+    has door;
 
 Class MachineFace
     with description
@@ -72,7 +57,10 @@ Class MachineFace
                     print "That would certainly be the right key^";
 
                     score = score + 1;
-                    if (AllKey(cube_room)) print "Hey, all the keys are in!^";
+                    if (AllKey(cube_room)) {
+                        print "All keys entered!";
+                        give machine open;
+                    }
                     rtrue;
                 } else {
                     move noun to player;

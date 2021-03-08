@@ -1,0 +1,33 @@
+Room bottom_staircase "Bottom of the staircase"
+    with description
+        "You follow the staircase under the machine down through the cavern.  It
+        winds deep through the rock, and soon the light from the cavern above is
+        a memory.  But there's still metal stairs under your feet and you keep
+        tentatively descending until you reach what feels like mud and rock beneath
+        your feet.  Walls surround you to the left and right, and there's no safe
+        way to ascend the staircase again.^^
+        The only way forwards is north.",
+        n_to middle_room;
+
+
+Room middle_room "The dark corridor"
+    with description
+        "The bottom of the staircase is to your south, but as you follow your
+        hand along the walls of the rocky corridor, you can finally start to see
+        something in the distance.  And if you can see something then there must
+        be light.  Or your eyes are tricking you in the darkness.",
+        n_to end_room,
+        s_to bottom_staircase;
+
+Room end_room "The outside"
+    with description
+    [;
+        print
+            "As you emerge from the end of the cavern, the sun beats down warmly on
+            your face.  You've been in the dark for such a long time that your eyes
+            ache with the change in light and you consider for a brief moment
+            retreating to the knowing of the dark.  After a few minutes, you take
+            a drink from a nearby stream and contemplate what to do with your life now.^^",
+            deadflag = 2;
+            rtrue;
+    ];
