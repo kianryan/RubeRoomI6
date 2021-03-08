@@ -13,18 +13,63 @@
 
 PuzzleRoom cube_room "The Cube Room"
     with description
-        "A central atrium carved from the rock houses an intricate machine roughly
+        [;
+            print "A central atrium carved from the rock houses an intricate machine roughly
         shaped in to a cube made from brass and gold.  The machine is about as high
-        and wide as a person.^^
-        The machine looks ... complicated. ^^
-        Passages in the rock lead off to the north, south, east and west.",
+        and wide as a person.^^";
+            if (self.room_scored == true) {
+                "The machine, spent now stands on stilts in the air.  In the space below
+                is a staircase leading down...";
+
+            } else {
+                "The machine looks ... complicated. ^^
+                    Passages in the rock lead off to the north, south, east and west.";
+            }
+        ],
         win_description
-        "MECHANISM HAPPENS, STAIRCASE EXPOSED.",
+        [;
+            print
+                "^^
+                --^^
+                ...As you fit the last piece of the puzzle together, the umbrella slowly starts
+                to turn.  You dash to the north side to watch the somewhat hypnotic umbrella's
+                canopy slowly and in it's stead, turn the cogs on the surface on the machine.
+                Tracing the lines you follow it around to the east side.^^
+
+                On the east side at the very top you just catch the small brass boot wind up
+                and give the marble an almightly kick.  The marble fires off down the helter
+                skelter of tubing, building up more and more speed until it reaches the turn
+                to the south side. ^^
+
+                Following it around to the south side you see it shoot past the flint cog,
+                causing a few sparks, just enough to light the bone try tinder to either side.
+                As the tinder burns away the small wooden blocks behind the tinder are exposed
+                and start to glow. In a couple of minutes bubbles start to form inside the
+                spiral glass tubing as the water start to boil.  You here sputtering from
+                the west side.^^
+
+                As the water boils and turns to steam, blowing a thin jet through the sails of
+                the little windmill.  As the windmill turns, the shaft below chops turns the
+                water in the tray causing the little boat to rhythmiclly bob up and down as it
+                slowly makes it's way to the little shore at the end.^^
+
+                As the little boat reaches the shore, the whole machine slows to a halt, and
+                for a few seconds you wonder what will happen next.  The floor rumbles and the
+                entire machine lifts away from the ground on ornate stils exposing a staircase
+                underneath leading down...^^";
+
+            remove north_face;
+            remove east_face;
+            remove south_face;
+            remove west_face;
+            rtrue;
+        ],
+
         n_to fire_room,
         s_to earth_room,
         e_to water_room,
         w_to air_room,
-        d_to machine;
+        d_to staircase;
 
 !  We need to ensure that keys are placed in the right spots on
 !  each side.
@@ -35,10 +80,24 @@ PuzzleRoom cube_room "The Cube Room"
 Prop machine "Machine" cube_room
     with name 'machine' 'cube',
         description
-        "You take a closer look at the machine in the center of the room.  It has
-        four sides (facing north, south, east and west), each tightly faced with
-        cogs, worm gears and drives.",
-    door_to bottom_staircase,
+        [;
+            if (cube_room.room_scored == true) {
+                "The machine is now out of your reach, high on ornate stilts.  The
+                staircase sits below it.";
+           } else {
+                "You take a closer look at the machine in the center of the room.  It has
+                four sides (facing north, south, east and west), each tightly faced with
+                cogs, worm gears and drives.";
+            }
+        ];
+
+Prop staircase "Staircase"
+    with name 'staircase' 'stairs',
+        description
+        "An ornate spiral staircase, with a handrail, leads in to the darkness below.
+        The slats are made of perforated metal and quite solid, but you get the feeling
+        that if you go down here, you're not coming back.",
+   door_to bottom_staircase,
     door_dir d_to,
     has door;
 
@@ -54,12 +113,12 @@ Class MachineFace
        after [;
             Receive:
                 if (noun == self.right_key) {
-                    print "That would certainly be the right key^";
-
+                    self.key_fitted();
                     score = score + 1;
                     if (AllKey(cube_room)) {
-                        print "All keys entered!";
-                        give machine open;
+                        move staircase to cube_room;
+                        give staircase open;
+                        cube_room.win_room();
                     }
                     rtrue;
                 } else {
@@ -73,15 +132,22 @@ Class MachineFace
 MachineFace north_face "North Face" cube_room
     with name 'north' 'face' 'side' 'cube',
         right_key air_key,
-        key_fitted "Looks like the key is fitted...",
+        key_fitted "An opened umbrella now protrudes from this face.  The cog at the base
+        of the umbrella fits neatly against the cog on the surface, making a complete
+        chain of cogs, screws and cams winding their way to the east side of the cube.",
         no_key "The north side has a small round hole in the very centre of the cube.
                 One cog lines up close to the hole, with a number interfacing to a series
-                of screws cogs, and cams to transfer the power to the east side of the cube.";
+                of screws cogs, and cams winding their way to the east side of the cube.";
 
 MachineFace east_face "East Face" cube_room
    with name 'east' 'face' 'side' 'cube',
         right_key earth_key,
-        key_fitted "Looks like the key is fitted...",
+        key_fitted "A small marble is now balanced at the start of the long brass tube.
+                Any attempt to move it brings it right back to it's start position,
+                you can't give it enough force to slide it down the tube.  A series
+                of tilted brass tubes run from the top of the cube to around the
+                mid point.  The small brass boot stands poised waiting.  The bottom
+                of the tube turns on to the south side.",
         no_key "The east side of the cube consists of a series of tilted brass tubes
                 running from the top of the cube to around the mid point.  The very top
                 tube is completely flat with a hole at the beginning.  What appears to
@@ -92,7 +158,13 @@ MachineFace east_face "East Face" cube_room
 MachineFace south_face "South Face" cube_room
     with name 'south' 'face' 'side' 'cube',
         right_key fire_key,
-        key_fitted "Looks like the key is fitted...",
+        key_fitted "On the south side the tube continues on to the lower half of the machine.
+                There's a small opening at the mid way point of the tube, and on the spindle
+                is now a cog of flint locked in to place. Small steel cages around
+                the spindle are packed with dried straw.  Above the spindle is a spiral
+                of beautifully blown glass open at the top end, standing upright.  Water
+                sits inside the spiral.  At the top of the glass spiral, the glass tubing
+                turns straight and turns on the west side.",
         no_key "On the south side the tube continues on the lower half of the machine.
                 There's a small opening at the mid way point of the tube, and a spindle
                 just above the opening to attach something to. Small steel cages around
@@ -104,7 +176,12 @@ MachineFace south_face "South Face" cube_room
 MachineFace west_face "West Face" cube_room
     with name 'west' 'face' 'side' 'cube',
         right_key water_key,
-        key_fitted "Looks like the key is fitted...",
+        key_fitted "On the west side the glass tubing stops suddenly before a tiny
+                gold windmill.  The windmill is at the very top of the cube out of your
+                reach and a single shaft extends down into a tub of water at the bottom.
+                There's a platform at the end of the tub of water, and the sides are
+                extended to quite a height.  You've dropped the small wooden boat
+                in the little lake, it bobs away merrily.",
         no_key "On the west side the glass tubing stops suddenly before a tiny
                 gold windmill.  The windmill is at the very top of the cube out of your
                 reach and a single shaft extends down into a tub of water at the bottom.
