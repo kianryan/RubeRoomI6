@@ -1,10 +1,17 @@
-PuzzleRoom water_room "The Water Room"
+PuzzleRoom water_room "Eastern Cavern"
     with description
         "You hear the water before you enter the room.  As you walk in to the
         room, you see the water falling from a waterfall in to a small rock
-        pool below.",
+        pool below.^^
+        The passage to the west leads back to the atrium.^^",
     with win_description
-        "The scale wobbles for a seconds and eventually settles perfectly balanced.";
+    [;
+        move water_key to water_room;
+        "The scale wobbles for a few seconds and eventually settles perfectly balanced.  ^^
+        You can feel through the ground something hidden move, and then a small wooden
+        sailboat floats out across the rockpool and lands on the shore.";
+    ],
+    w_to cube_room;
 
 Prop waterfall "Waterfall" water_room
     with name 'waterfall'
@@ -17,7 +24,7 @@ Attribute fillable; ! A container that can be filled
 Attribute liquid; ! Contains an infinite liquid that can be used to fill a fillable
 
 Prop rockpool "Rock Pool" water_room
-    with name 'rock' 'pool' 'pond',
+    with name 'rock' 'pool' 'pond' 'rockpool',
     with description
         "As you peer in to the rock pool you can't tell how deep it goes.  The
         light fades away in to nothingness.  What you can see is absolutely clear

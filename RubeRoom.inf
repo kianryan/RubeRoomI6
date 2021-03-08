@@ -1,9 +1,9 @@
 !============================================================================
-Constant Story "Rube  Room";
+Constant Story "Puzzle Cave";
 Constant Headline
-    "^The Rube Room
+    "^The Puzzle Cave
     ^by Kian Ryan.^";
-Constant MAX_SCORE 999;
+Constant MAX_SCORE 9;
 Release 1; Serial "201110";
 ! for keeping track of public releases
 ! Constant MAX_SCORE = 4;
@@ -27,15 +27,27 @@ Include ">EndRoom";
 ! Entry point routines
 [ Initialise;
     location = cube_room;
+    lookmode = 2;
+    player.description = "You're you.^^
+        You look like you fell down a hole (you did)
+        and you could do with a bath.";
     ! lookmode = 2;
     ! like the VERBOSE command
 
-    move knife to player;
-    move air_key to player;
-    move earth_key to player;
-    move fire_key to player;
-    move water_key to player;
-];
+    move knife to cube_room;
+    ! move air_key to player;
+    ! move earth_key to player;
+    ! move fire_key to player;
+    ! move water_key to player;
+
+    "^^You fall from a hole in the ceiling and land with a dull thud on your posterior
+    on the cold cavern floor.  You were looking for a cave entrance, after being given
+    some vague instructions by an old friend.  Promises of riches, puzzles,
+    adventure.  The puzzles and adventure caught your attention more than the riches.
+    As you were looking for the entrance, something gave way beneath your feet
+    and the next thing you knew, you were here.  The cavern is dark, and cold, but there's
+    just enough light to make out a large person sized cube in the middle of this space.^";
+    ];
 
 ! Standard and extended grammar
 Include "Grammar";

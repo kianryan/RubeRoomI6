@@ -82,7 +82,7 @@ Extend 'blow'
     if (~~(noun provides greeted)) print_ret "You can't greet that.";
     if (noun.greeted) print_ret (the) noun, " says hello again.";
     noun.greeted = true;
-    print_ret "Hello there.";
+    noun.greeting();
 ];
 
 Verb 'greet' 'hello'

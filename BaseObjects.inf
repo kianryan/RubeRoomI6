@@ -24,6 +24,13 @@ Class Prop
     with description "WORKING ON IT",
     has scenery;
 
+Object knife "knife"
+    with name 'knife' 'penknife',
+        cutter 1,
+        description
+        "A small folding knife with a bone handle and a hardened steel blade.  The blade
+        is only a few inches in length, but looks good for a range of jobs.";
+
 Class Key;
 
 Key air_key "umbrella"
@@ -42,7 +49,7 @@ Key fire_key "flint cog"
     Is it flint?";
 
 Key water_key "tiny boat"
-    with name 'boat' 'benchy',
+    with name 'boat' 'benchy' 'sailboat',
         description "It's a tiny boat.  Made of a very light wood, it's even got a
     tiny wooden sail.";
 

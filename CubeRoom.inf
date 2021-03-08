@@ -11,19 +11,18 @@
     return a;
 ];
 
-PuzzleRoom cube_room "The Cube Room"
+PuzzleRoom cube_room "The Atrium"
     with description
         [;
-            print "A central atrium carved from the rock houses an intricate machine roughly
-        shaped in to a cube made from brass and gold.  The machine is about as high
-        and wide as a person.^^";
+            print "A central atrium carved from the rock houses an intricate man made machine
+        shaped in to a cube.  It's fashioned from components of brass and gold.  The machine
+        is about as high and wide as a person.^^";
             if (self.room_scored == true) {
-                "The machine, spent now stands on stilts in the air.  In the space below
-                is a staircase leading down...";
-
+                "The machine, now stands on stilts in the air.  The space below the machine
+                houses a staircase leading down...";
             } else {
                 "The machine looks ... complicated. ^^
-                    Passages in the rock lead off to the north, south, east and west.";
+                    Passages lead off to the north, south, east and west.";
             }
         ],
         win_description
@@ -33,7 +32,7 @@ PuzzleRoom cube_room "The Cube Room"
                 --^^
                 ...As you fit the last piece of the puzzle together, the umbrella slowly starts
                 to turn.  You dash to the north side to watch the somewhat hypnotic umbrella's
-                canopy slowly and in it's stead, turn the cogs on the surface on the machine.
+                canopy slowly and in its stead, turn the cogs on the surface on the machine.
                 Tracing the lines you follow it around to the east side.^^
 
                 On the east side at the very top you just catch the small brass boot wind up
@@ -43,20 +42,20 @@ PuzzleRoom cube_room "The Cube Room"
 
                 Following it around to the south side you see it shoot past the flint cog,
                 causing a few sparks, just enough to light the bone try tinder to either side.
-                As the tinder burns away the small wooden blocks behind the tinder are exposed
+                As the tinder burns away wooden blocks behind the tinder are exposed
                 and start to glow. In a couple of minutes bubbles start to form inside the
-                spiral glass tubing as the water start to boil.  You here sputtering from
+                spiral glass tubing as the water start to boil.  You hear sputtering from
                 the west side.^^
 
-                As the water boils and turns to steam, blowing a thin jet through the sails of
-                the little windmill.  As the windmill turns, the shaft below chops turns the
+                Following the cube round, as the water boils a thin jet of steam blows through the sails of
+                the little windmill.  As the windmill turns, the shaft below chops the
                 water in the tray causing the little boat to rhythmiclly bob up and down as it
                 slowly makes it's way to the little shore at the end.^^
 
-                As the little boat reaches the shore, the whole machine slows to a halt, and
-                for a few seconds you wonder what will happen next.  The floor rumbles and the
-                entire machine lifts away from the ground on ornate stils exposing a staircase
-                underneath leading down...^^";
+                Finally the little boat reaches the shore, the whole machine slows to a halt, and
+                for a few seconds you wonder what that was all about.  The floor rumbles and the
+                entire machine lifts away from the ground on ornate pillars exposing a staircase
+                leading down...^^";
 
             remove north_face;
             remove east_face;
@@ -105,16 +104,21 @@ Class MachineFace
     with description
         [;
             if (parent(self.right_key) == self) {
-                self.key_fitted();
+                self.key_fitted_description();
             } else {
                 self.no_key();
            }
         ],
+       key_fitted false,
        after [;
             Receive:
                 if (noun == self.right_key) {
-                    self.key_fitted();
-                    score = score + 1;
+                    if (self.key_fitted == false) {
+                        self.key_fitted = true;
+                        give self ~open;
+                        score = score + 1;
+                        self.key_fitted_description();
+                    }
                     if (AllKey(cube_room)) {
                         move staircase to cube_room;
                         give staircase open;
@@ -126,13 +130,13 @@ Class MachineFace
                     print_ret "I can't work out how to fit that here.";
                 }
         ],
-    has scenery container open;
+    has scenery supporter open;
 
 
 MachineFace north_face "North Face" cube_room
     with name 'north' 'face' 'side' 'cube',
         right_key air_key,
-        key_fitted "An opened umbrella now protrudes from this face.  The cog at the base
+        key_fitted_description "An opened umbrella now protrudes from this face.  The cog at the base
         of the umbrella fits neatly against the cog on the surface, making a complete
         chain of cogs, screws and cams winding their way to the east side of the cube.",
         no_key "The north side has a small round hole in the very centre of the cube.
@@ -142,7 +146,7 @@ MachineFace north_face "North Face" cube_room
 MachineFace east_face "East Face" cube_room
    with name 'east' 'face' 'side' 'cube',
         right_key earth_key,
-        key_fitted "A small marble is now balanced at the start of the long brass tube.
+        key_fitted_description "A small marble is now balanced at the start of the long brass tube.
                 Any attempt to move it brings it right back to it's start position,
                 you can't give it enough force to slide it down the tube.  A series
                 of tilted brass tubes run from the top of the cube to around the
@@ -158,7 +162,7 @@ MachineFace east_face "East Face" cube_room
 MachineFace south_face "South Face" cube_room
     with name 'south' 'face' 'side' 'cube',
         right_key fire_key,
-        key_fitted "On the south side the tube continues on to the lower half of the machine.
+        key_fitted_description "On the south side the tube continues on to the lower half of the machine.
                 There's a small opening at the mid way point of the tube, and on the spindle
                 is now a cog of flint locked in to place. Small steel cages around
                 the spindle are packed with dried straw.  Above the spindle is a spiral
@@ -176,7 +180,7 @@ MachineFace south_face "South Face" cube_room
 MachineFace west_face "West Face" cube_room
     with name 'west' 'face' 'side' 'cube',
         right_key water_key,
-        key_fitted "On the west side the glass tubing stops suddenly before a tiny
+        key_fitted_description "On the west side the glass tubing stops suddenly before a tiny
                 gold windmill.  The windmill is at the very top of the cube out of your
                 reach and a single shaft extends down into a tub of water at the bottom.
                 There's a platform at the end of the tub of water, and the sides are

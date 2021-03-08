@@ -25,11 +25,21 @@
     return a;
 ];
 
-PuzzleRoom fire_room "The Fire Cave"
-    with description "The walls are bare, but warm to the touch.  As you take a closer
-    look at the walls, you realise the rock here is different, possibly volcanic.  You
-    run your hand over and almost cut yourself on the sharp edges.  In the centre of the
-    room are five lanterns in a line.";
+PuzzleRoom fire_room "Northern Cavern"
+    with description
+        "The walls are bare, but warm to the touch.  As you take a closer
+        look at the walls, you realise the rock here is different, possibly volcanic.  You
+        run your hand over and almost cut yourself on the sharp edges.  In the centre of the
+        room are five lanterns in a line.^^
+        The paassage to the south leads back to the atrium.^^",
+        win_description
+        [;
+            move fire_key to self;
+            "With all the lanterns lit, you can see what you couldn't before.  In the middle
+            of the room, lying on the floor amongst the rubble , is a piece of rock different
+            from the others.  It's shaped like a rough cog, with a hole in the middle.";
+        ],
+        s_to cube_room;
 
 Class Lantern
     with name 'lantern' 'lamp',

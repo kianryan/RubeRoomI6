@@ -1,15 +1,21 @@
-PuzzleRoom earth_room "The Earth Room"
+PuzzleRoom earth_room "Southern Cavern"
     with description[;
         print "This large cavern is covered in a vast array of green and luscious plant
         life.  Natural light floods in from a hole in the top of cavern, bringing a
         vibrancy to unexpected waves of colours in the room.  In the centre, a ring
         of boulders provides a convenient place to rest oneself while taking in the
-        spendlours of the plant life. ";
+        spendlours of the plant life. ^^
+        The passage to the north leads back to the atrium.^^";
 
         if (parent(troll) == self)
             print "^^Sat on one of the boulders, hunched over himself and head resting
             on a closed fist, is what appears to be a abstract, rocky human statue.";
-        ];
+        ],
+        win_description[;
+            move earth_key to earth_room;
+        ],
+    n_to cube_room;
+
 
 Prop boulder "Boulder" earth_room
     with name 'boulder',
@@ -32,7 +38,7 @@ NPC troll "Rodin" earth_room
         description
             "Towering twice the size of a man, and made from what looks like loosely
             pieces of held together rock, a troll sits on one of the boulders in the
-            middle of this cavern.  Every so often he sighs to himself.",
+            middle of this cavern.  Every so often he sighs to himself.^^",
         initial [;
             print "^The statue slowly tilts his head and gives you a surprisingly deep look.^";
             if (location hasnt visited) {
@@ -40,9 +46,10 @@ NPC troll "Rodin" earth_room
                 THOUGHT DEEP. DEEP THOUGHT. SSH.^^";
             }
         ],
+        greeting "HELLO THERE, NOW WE CAN TALK",
         life [;
             Talk:
-                if (~~(self.greeted)) "U RUDE."; ! don't be rude.
+                if (~~(self.greeted)) "U RUDE. HELLO."; ! don't be rude.
                 if (self.long_intro) {
                     print "I BEEN HERE LONG TIME.^
                     WIZARD ASKED TO THINK ON BIG PROBLEM. ^
@@ -68,15 +75,17 @@ NPC troll "Rodin" earth_room
                 if (self.long_intro) {
                     print "WAT";
                 }
-                if (noun == 'silence') {
+                else if (noun == 'silence') {
                     print "'HEH.'^
                     ^
-                    The troll disappears in a cloud along with the silence.
-                    A key is left behind on the rock where he was sat.";
+                    The troll disappears in a cloud along with the silence. ^^
+                    Something is left behind on the boulder where he was sat.";
                     remove self;
                     earth_room.win_room();
+                    rtrue;
+                } else {
+                    "The troll looks at you quizzacly, but nothing happens.";
                 }
-                "The troll looks at you quizzacly, but nothing happens.";
            ],
     with long_intro true,
     with greeted false, ! you must greet first.

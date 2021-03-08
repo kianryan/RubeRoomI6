@@ -1,32 +1,67 @@
 Attribute blowable;
 Attribute blow_target;
 
-PuzzleRoom air_room "The Air Room"
+PuzzleRoom air_room "Western Cavern"
     with description
-        "This cavern is slippery underfoot, feels possibly like limestone.  The cavern
-        is nearly smooth from erosion apart from the a single shaft of light that emeges
-        from a crack running from the base to the roof of one wall.  At the base of the
-        wall a clump of rushes is growing from between the crack and gently rocks in the
-        breeze eminating from the thin gap.",
-        win_description
-        "The note from your impromtu pipe resonates with the room and the gap opens up,
-        revealing a small room just beyond.";
+        [;
+            print "This cavern is slippery underfoot, as you touch the walls, it feels like it could
+            be limestone.^^";
+
+            if (self.room_scored) {
+                print "The crack on the westerly wall is now large enough for a person to slip through
+                to the lit room beyond.^^";
+            } else {
+                print "The cavern is nearly smooth from erosion apart from the a single shaft of
+                dim light that emeges from a long crack running from the base to the roof of the
+                westerly wall.^^";
+            }
+            print "At the base of the wall a clump of rushes is growing from between the crack
+                and gently rocks in the breeze eminating from the gap.^^
+                The passage to the east leads back to the atrium.^^";
+            rtrue;
+        ],
+       win_description
+        [;
+            give gap open;
+            move air_key to gap_room;
+            "^^The note from your impromtu pipe resonates with the room and the gap opens up,
+            revealing the small room just beyond.  It looks like you can just squeeze through
+            to the west.";
+        ],
+        e_to cube_room,
+        w_to gap;
+
+
+! Oh, we can use a door to get to the gap now.
+! That would work pretty well.
+
+Room gap_room "The Gap"
+    with description
+        [;
+        print "It's a small cavity, just on the other side of the crevice, and it's a squeeze to
+        make it through.  There's very little to catch your attention here, except maybe you see...^^";
+        rfalse;
+        ],
+    e_to air_room;
 
 Prop gap "Gap" air_room
     with name 'thin' 'gap' 'crevice',
     with description
-        "The thin gap in the rock runs from the base to the roof this room.
-        There's a breeze coming through the gap and it feels refreshing against your
-        skin.  There's something odd about the breeze, but you can't put your finger on it.
-        You can just about get your finger in the gap, but no more.  It looks like the gap
-        leads somewhere.";
-
-Object knife "Knife" air_room
-    with name 'knife' 'penknife',
-        cutter 1,
-        description
-        "A small folding knife with a bone handle and a hardened steel blade.  The blade
-        is only a few inches in length, put is practical for a range of jobs.";
+        [;
+            if (self has open) {
+                "The gap has opened now to just about the width of a person.  You can see a
+                space beyond.  It'll be a push, but you can probably squeeze through.";
+            } else {
+                "The thin gap in the rock runs from the base to the roof of this room.^^
+                You can just about fit your finger in the gap, but no more.^^
+                There's a breeze coming through the gap and it feels refreshing against your
+                skin.^^
+                It looks like the gap leads somewhere.";
+            }
+        ],
+        door_to gap_room,
+        door_dir w_to,
+    has door;
 
 ! The rush needs to be cut to length 3 to find the right pitch.
 ! It will be possible to over cut the reed.
@@ -49,10 +84,10 @@ Object rush "rush"
             print_ret "Taking your knife, you cut a length from the end.  Your reed is now shorter.";
         Blow:
             if (second == gap) {
-                print "You place the end the reed into the gap.^";
+                print "You place the end the reed into the gap.  This feels right.^";
             }
-            if (self.length > 3) print_ret "You blow a shrill note, your teeth rattle.";
-            if (self.length < 3) print_ret "You blow a deep note, and the back of your head aches.";
+            if (self.length > 3) print_ret "You blow a shrill note, your teeth rattle, but nothing else happens.";
+            if (self.length < 3) print_ret "You blow a deep note, and the back of your head aches, but nothing else happens.";
             if (self.length == 3) {
                 print "You blow a beautiful note, that resonates with the cave walls.";
             }
@@ -60,6 +95,9 @@ Object rush "rush"
                air_room.win_room();
            }
            rtrue;
+        Drop:
+            remove rush;
+            print_ret "As you drop the rush, it gets lost in the darkness of the cavern floor";
     ],
     has blowable;
 

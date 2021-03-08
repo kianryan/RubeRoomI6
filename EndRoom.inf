@@ -4,11 +4,10 @@ Room bottom_staircase "Bottom of the staircase"
         winds deep through the rock, and soon the light from the cavern above is
         a memory.  But there's still metal stairs under your feet and you keep
         tentatively descending until you reach what feels like mud and rock beneath
-        your feet.  Walls surround you to the left and right, and there's no safe
-        way to ascend the staircase again.^^
-        The only way forwards is north.",
+        your feet.  Walls surround you to the left and right.^^
+        You don't feel confident about ascending those stairs again.^^
+        The only way now is north.",
         n_to middle_room;
-
 
 Room middle_room "The dark corridor"
     with description
@@ -25,9 +24,10 @@ Room end_room "The outside"
         print
             "As you emerge from the end of the cavern, the sun beats down warmly on
             your face.  You've been in the dark for such a long time that your eyes
-            ache with the change in light and you consider for a brief moment
-            retreating to the knowing of the dark.  After a few minutes, you take
-            a drink from a nearby stream and contemplate what to do with your life now.^^",
+            ache with the change in light and for a brief time you consider
+            retreating to the dark caves.  When you've adjusted, and can see clearnly again
+            you take a drink from a nearby stream and contemplate what's next now that
+            little adventure is over.^^",
             deadflag = 2;
             rtrue;
     ];
