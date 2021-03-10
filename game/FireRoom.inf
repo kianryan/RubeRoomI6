@@ -1,6 +1,7 @@
 ! Toggle adjacent lanterns on or off.
 [
     Toggle lantern;
+    VorpleAttributeFlags = false;
     if (lantern has light) {
         give lantern ~light;
         lantern.short_name();
@@ -11,6 +12,7 @@
         lantern.short_name();
         print_ret " bursts in to flames!";
     }
+    VorpleAttributeFlags = true;
 ];
 
 ! Have all lanterns in a room been lit
