@@ -19,9 +19,13 @@ PuzzleRoom cube_room "The Atrium"
         is about as high and wide as a person.^^";
             if (self.room_scored == true) {
                 print "The machine, now stands on stilts in the air.  The space below the machine
-                houses a staircase leading down...^^";
+                houses a staircase leading ";
+                VorpleLinkCommand("down");
+                print "^^";
             } else {
-                print "The machine looks ... complicated.^^";
+                print "The ";
+                VorpleLinkCommandText("examine machine", "machine");
+                print " looks ... complicated.^^";
             }
             print "Passages lead off to the ";
             VorpleLinkCommand("north");
@@ -92,9 +96,14 @@ Prop machine "Machine" cube_room
                 "The machine is now out of your reach, high on ornate stilts.  The
                 staircase sits below it.";
            } else {
-                "You take a closer look at the machine in the center of the room.  It has
-                four sides (facing north, south, east and west), each tightly faced with
-                cogs, worm gears and drives.";
+                print "You take a closer look at the machine in the center of the room.  It has
+                four sides (";
+                VorpleLinkCommandText("examine north face", "facing north, ");
+                VorpleLinkCommandText("examine south face", "south, ");
+                VorpleLinkCommandText("examine east face", "east, ");
+                VorpleLinkCommandText("examine west face", "and west");
+                "), each tightly faced with
+                cogs, worm gears and drives.^";
             }
         ];
 
@@ -146,10 +155,10 @@ MachineFace north_face "North Face" cube_room
         right_key air_key,
         key_fitted_description "An opened umbrella now protrudes from this face.  The cog at the base
         of the umbrella fits neatly against the cog on the surface, making a complete
-        chain of cogs, screws and cams winding their way to the east side of the cube.",
+        chain of cogs, screws and cams winding their way to the east side of the cube.^",
         no_key "The north side has a small round hole in the very centre of the cube.
                 One cog lines up close to the hole, with a number interfacing to a series
-                of screws cogs, and cams winding their way to the east side of the cube.";
+                of screws cogs, and cams winding their way to the east side of the cube.^";
 
 MachineFace east_face "East Face" cube_room
    with name 'east' 'face' 'side' 'cube',
@@ -165,7 +174,7 @@ MachineFace east_face "East Face" cube_room
                 tube is completely flat with a hole at the beginning.  What appears to
                 be a tiny metal boot is lined up with the start of the tube, connected
                 to the gears coming from the north side.  The bottom of the tube turns
-                on to the south side.";
+                on to the south side.^";
 
 MachineFace south_face "South Face" cube_room
     with name 'south' 'face' 'side' 'cube',
@@ -176,14 +185,14 @@ MachineFace south_face "South Face" cube_room
                 the spindle are packed with dried straw.  Above the spindle is a spiral
                 of beautifully blown glass open at the top end, standing upright.  Water
                 sits inside the spiral.  At the top of the glass spiral, the glass tubing
-                turns straight and turns on the west side.",
+                turns straight and turns on the west side.^",
         no_key "On the south side the tube continues on the lower half of the machine.
                 There's a small opening at the mid way point of the tube, and a spindle
                 just above the opening to attach something to. Small steel cages around
                 the spindle are packed with dried straw.  Above the spindle is a spiral
                 of beautifully blown glass open at the top end, standing upright.  Water
                 sits inside the spiral.  At the top of the glass spiral, the glass tubing
-                turns straight and turns on the west side.";
+                turns straight and turns on the west side.^";
 
 MachineFace west_face "West Face" cube_room
     with name 'west' 'face' 'side' 'cube',
@@ -193,9 +202,9 @@ MachineFace west_face "West Face" cube_room
                 reach and a single shaft extends down into a tub of water at the bottom.
                 There's a platform at the end of the tub of water, and the sides are
                 extended to quite a height.  You've dropped the small wooden boat
-                in the little lake, it bobs away merrily.",
+                in the little lake, it bobs away merrily.^",
         no_key "On the west side the glass tubing stops suddenly before a tiny
                 gold windmill.  The windmill is at the very top of the cube out of your
                 reach and a single shaft extends down into a tub of water at the bottom.
                 There's a platform at the end of the tub of water, and the sides are
-                extended to quite a height.  You can't reach in to the water in the tub.";
+                extended to quite a height.  You can't reach in to the water in the tub.^";

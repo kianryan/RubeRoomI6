@@ -1,10 +1,12 @@
 !============================================================================
-Constant Story "Puzzle Cave";
-Constant Headline
-    "^The Puzzle Cave
-    ^by Kian Ryan.^";
+Constant Story "Puzzle Cave^";
+! Constant Headline
+!     "^The Puzzle Cave
+    ! ^by Kian Ryan.^";
+Release 1;
+! Serial "210308";
+
 Constant MAX_SCORE 9;
-Release 1; Serial "210308";
 ! for keeping track of public releases
 ! Constant MAX_SCORE = 4;
 
@@ -14,7 +16,9 @@ Include "Parser";
 Replace FillSub;
 Replace CutSub;
 Replace BlowSub;
+Replace WriteListR;
 Include "VerbLib";
+Include ">WriteListFromVorple";
 
 Include "vorple-hyperlinks.h";
 
