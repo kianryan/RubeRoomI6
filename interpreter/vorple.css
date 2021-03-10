@@ -351,6 +351,10 @@ nav.game-nav ul {
     padding-left: 0;
 }
 
+nav.game-nav ul li a {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 999px) {
     nav.game-nav {
         position: sticky;
