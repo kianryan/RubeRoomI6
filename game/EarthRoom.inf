@@ -6,7 +6,7 @@ PuzzleRoom earth_room "Southern Cavern"
         of boulders provides a convenient place to rest oneself while taking in the
         spendlours of the plant life. ^^";
 
-        print "The paassage to the ";
+        print "The passage to the ";
         VorpleLinkCommand("north");
         print " leads back to the atrium.^^";
 

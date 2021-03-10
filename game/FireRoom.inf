@@ -32,7 +32,7 @@ PuzzleRoom fire_room "Northern Cavern"
             look at the walls, you realise the rock here is different, possibly volcanic.  You
             run your hand over and almost cut yourself on the sharp edges.  In the centre of the
             room are five lanterns in a line.^^";
-            print "The paassage to the ";
+            print "The passage to the ";
             VorpleLinkCommand("south");
             print_ret " leads back to the atrium.^^";
         ],
@@ -49,7 +49,7 @@ Class Lantern
     with name 'lantern' 'lamp',
        short_name [;
            print (ordinal) self.index, " lantern";
-           if (self has light) {
+           if (self has light && VorpleAttributeFlags == true) {
                print " (lit)";
            }
            return true;

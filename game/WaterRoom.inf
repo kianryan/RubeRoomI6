@@ -2,9 +2,12 @@ PuzzleRoom water_room "Eastern Cavern"
     with description
         [;
             print "You hear the water before you enter the room.  As you walk in to the
-                room, you see the water falling from a waterfall in to a small rock
-                pool below.^^";
-            print "The paassage to the ";
+                room, you see the water falling from a ";
+            VorpleLinkCommandText("examine waterfall", "waterfall");
+            print " in to a ";
+            VorpleLinkCommandText("examine rockpool", "small rock pool ");
+            print "below.^^";
+            print "The passage to the ";
             VorpleLinkCommand("west");
             print_ret " leads back to the atrium.^^";
         ]

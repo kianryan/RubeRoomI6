@@ -98,9 +98,6 @@ Verb 'talk' 't//' 'converse' 'chat' 'gossip'
     * 'to'/'with' creature  -> Talk
     * creature -> Talk;
 
-! Array examineCommand buffer 300;
-! Array objectName buffer 300;
-
 [HTMLInventorySub i;
 	if (IsVorpleSupported()) {
 		L__M(##Inv, 2);     ! for 6/11 and 6/12 compatibility
@@ -108,8 +105,10 @@ Verb 'talk' 't//' 'converse' 'chat' 'gossip'
 		objectloop (i in player) {
                         ! Create the examine command.
                         bp_output_stream(3, examineCommand, 300);
+                        VorpleAttributeFlags = false;
                         print "examine ";
                         print (name) i;
+                        VorpleAttributeFlags = true;
                         bp_output_stream(-3);
 
                         bp_output_stream(3, objectName, 300);
@@ -128,3 +127,56 @@ Verb 'talk' 't//' 'converse' 'chat' 'gossip'
 
 Extend 'inventory' first
 *		->HTMLInventory;
+
+[HelpSub;
+    VorpleOpenHtmlTag("blockquote");
+    VorpleOpenHtmlTag("p");
+    print "This is a text adventure game, where you enter commands at the prompt.  A range of commands are available to you such as ";
+    VorpleLinkCommandText("examine", "EXAMINE");
+    print ", ";
+    VorpleLinkCommandText("take", "TAKE");
+    print ", ";
+    VorpleLinkCommandText("put", "PUT");
+    print ", ";
+    VorpleLinkCommandText("talk", "TALK");
+    print ", ";
+    VorpleLinkCommandText("hello", "HELLO");
+    print ", and ";
+    VorpleLinkCommandText("say", "SAY");
+    print ".  Some commands can be used on their own such as ";
+    VorpleLinkCommandText("examine", "EXAMINE");
+    print ", where others will require interacting with objects or characters, for examine ";
+    VorpleLinkCommandText("put large amphora on scale", "PUT LARGE AMPHORA ON SCALE");
+    print " or ";
+    VorpleLinkCommandText("hello rodin", "HELLO RODIN");
+    print ". The interpreter is good at working out what you want from natural language, so be explicit.  If you want to ";
+    VorpleLinkCommandText("fill", "FILL");
+    print " or ";
+    VorpleLinkCommandText("light", "LIGHT");
+    print " something, it helps to specify both subject and target.";
+    VorpleCloseHTMLTag();
+    VorpleOpenHtmlTag("p");
+    print "You navigate between rooms using compass directions.  ";
+    VorpleLinkCommandText("north", "NORTH");
+    print ", ";
+    VorpleLinkCommandText("south", "SOUTH");
+    print ", ";
+    VorpleLinkCommandText("east", "EAST");
+    print "and ";
+    VorpleLinkCommandText("west", "WEST");
+    print ".  Each room descriptoin will tell you where you can move to.";
+    VorpleCloseHTMLTag();
+   VorpleOpenHtmlTag("p");
+    print "The game is a collection of puzzles, that will require some experimentation to solve.  There's a range of puzzle
+    types to solve here, do not assume that the same approach for one puzzle will work for the next.";
+    VorpleCloseHTMLTag();
+    VorpleOpenHtmlTag("p");
+    print "If you get stuck in a room, it helps to ";
+    VorpleLinkCommandText("look", "LOOK");
+    print ", and really take in the description.";
+    VorpleCloseHTMLTag();
+    VorpleCloseHTMLTag();
+];
+
+Verb 'help'
+    * -> Help;

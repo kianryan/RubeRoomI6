@@ -8,16 +8,23 @@ PuzzleRoom air_room "Western Cavern"
             be limestone.^^";
 
             if (self.room_scored) {
-                print "The crack on the westerly wall is now large enough for a person to slip through
+                print "The crack on the ";
+                VorpleLinkCommandText("west", "westerly wall");
+                print " is now large enough for a person to slip through
                 to the lit room beyond.^^";
             } else {
                 print "The cavern is nearly smooth from erosion apart from the a single shaft of
-                dim light that emeges from a long crack running from the base to the roof of the
-                westerly wall.^^";
+                dim light that emeges from a long crack running from the base to the roof of the ";
+                VorpleLinkCommandText("examine gap", "westerly wall");
+                new_line;
             }
-            print "At the base of the wall a clump of rushes is growing from between the crack
-                and gently rocks in the breeze eminating from the gap.^^";
-            print "The paassage to the ";
+            print "At the base of the wall a clump of ";
+            VorpleLinkCommandText("examine rushes", "rushes");
+            print " is growing from between the crack and gently rocks in the breeze eminating from the ";
+            VorpleLinkCommandText("examine gap", "gap.");
+            new_line;
+            new_line;
+            print "The passage to the ";
             VorpleLinkCommand("east");
             print_ret " leads back to the atrium.^^";
         ],
@@ -25,9 +32,10 @@ PuzzleRoom air_room "Western Cavern"
         [;
             give gap open;
             move air_key to gap_room;
-            "^^The note from your impromtu pipe resonates with the room and the gap opens up,
-            revealing the small room just beyond.  It looks like you can just squeeze through
-            to the west.";
+            print "^^The note from your impromtu pipe resonates with the room and the gap opens up,
+            revealing the small room just beyond.  It looks like you can just squeeze through ";
+            VorpleLinkCommandText("west", "to the west.");
+            rtrue;
         ],
         e_to cube_room,
         w_to gap;
@@ -40,7 +48,10 @@ Room gap_room "The Gap"
     with description
         [;
         print "It's a small cavity, just on the other side of the crevice, and it's a squeeze to
-        make it through.  There's very little to catch your attention here, except maybe you see...^^";
+        make it through.  ^^";
+        print "The passage to the ";
+        VorpleLinkCommand("east");
+        print " leads back to the cavern.^^";
         rfalse;
         ],
     e_to air_room;

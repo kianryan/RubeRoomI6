@@ -10,6 +10,8 @@ Constant MAX_SCORE 9;
 ! for keeping track of public releases
 ! Constant MAX_SCORE = 4;
 
+Global VorpleAttributeFlags = true;		! do we need a tooltip on the prompt
+
 Include "vorple.h";
 Include "Parser";
 
@@ -21,6 +23,9 @@ Include "VerbLib";
 Include ">WriteListFromVorple";
 
 Include "vorple-hyperlinks.h";
+Include "vorple-screen-effects.h";
+Include "vorple-tooltips.h";
+
 
 Include ">Utils";
 Include ">BaseObjects";
@@ -30,6 +35,25 @@ Include ">WaterRoom";
 Include ">AirRoom";
 Include ">EarthRoom";
 Include ">EndRoom";
+
+Global VorpleParserError = 0;		! do we need a tooltip on the prompt
+
+! a stub that is called when there is a parser error
+[ ParserError err;
+    if (err == STUCK_PE || err == VERB_PE) VorpleParserError = 1;
+	return 0;  ! needed for processing to continue
+];
+
+Global beforefirstcommand = 1;
+! AfterPrompt is a I6 lib that gets called right after the prompt is displayed; put your
+!    prompt tooltips there!
+[ AfterPrompt ;
+	if (beforefirstcommand) { beforefirstcommand = 0; VorpleTooltipPrompt("Type or click a command to play."); }
+	if (VorpleParserError == 1) {
+		VorpleTooltipPrompt("A list of common commands is available at the top of the page, or try typing actions.  A more comprehensive explination is availble via HELP.");
+		VorpleParserError=0;
+	}
+];
 
 !============================================================================
 ! Entry point routines
@@ -48,16 +72,17 @@ Include ">EndRoom";
     ! move fire_key to player;
     ! move water_key to player;
 
-    print "^^You fall from a hole in the ceiling and land with a dull thud on your posterior
+    VorpleInitialise();
+
+    VorpleBoxedQuotation("You fall from a hole in the ceiling and land with a dull thud on your posterior
     on the cold cavern floor.  You were looking for a cave entrance, after being given
     some vague instructions by an old friend.  Promises of riches, puzzles,
     adventure.  The puzzles and adventure caught your attention more than the riches.
     As you were looking for the entrance, something gave way beneath your feet
     and the next thing you knew, you were here.  The cavern is dark, and cold, but there's
-    just enough light to make out a large person sized cube in the middle of this space.^";
+    just enough light to make out a large person sized cube in the middle of this space.^");
+];
 
-    VorpleInitialise();
-    ];
 
 ! Standard and extended grammar
 Include "Grammar";

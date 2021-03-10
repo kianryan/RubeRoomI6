@@ -342,24 +342,63 @@ body .vex.vex-theme-plain .vex-content {
 
 /* Responsive classes */
 
+/* nav.game-nav ul {
+} */
+
+nav.game-nav ul {
+    list-style-type: none;
+    margin-left: 1rem;
+    padding-left: 0;
+}
+
+@media screen and (max-width: 999px) {
+    nav.game-nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3rem;
+        background-color: white;
+        border: 1px solid black;
+        box-shadow: 5px 5px 5px lightgrey;
+    }
+
+    nav.game-nav ul {
+        display: inline-block;
+    }
+
+    nav.game-nav ul li {
+        margin: 0 0.5rem;;
+        display: inline-block;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    nav.game-nav {
+        position: fixed;
+        left: 30px;
+        top: 30px;
+        background-color: white;
+        border: 1px solid black;
+        box-shadow: 5px 5px 5px lightgrey;
+        width: 10rem;
+    }
+
+
+}
+
 @media screen and (min-width: 569px) {
     .sm-only {
         display: none;
     }
+
 }
 
 @media screen and (max-width: 568px) {
     .lg-only {
         display: none;
     }
+
+
 }
 
-nav.game-nav {
-    position: fixed;
-    left: 30px;
-    top: 30px;
-    background-color: white;
-    border: 1px solid black;
-    box-shadow: 5px 5px 5px lightgrey;
-    width: 10rem;
-}
