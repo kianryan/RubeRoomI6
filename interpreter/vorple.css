@@ -353,3 +353,13 @@ body .vex.vex-theme-plain .vex-content {
         display: none;
     }
 }
+
+nav.game-nav {
+    position: fixed;
+    left: 30px;
+    top: 30px;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px lightgrey;
+    width: 10rem;
+}
