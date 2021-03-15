@@ -1,13 +1,13 @@
 # The Puzzle Room
 
-An interactive fiction project using Inform6 and Vorple.
+An interactive fiction project using [Inform6](https://www.inform-fiction.org/) and [Vorple](https://vorple-if.com/).
 
 You can play the game [here](https://icy-sky-03dc70b03.azurestaticapps.net/).
 
 ## Running The Game
 
 If you fancy running the game on a Z5 interpreter, the included game/RubeRoom.z5 file 
-should run fine on any Z5 interpreter.  I built and debugged the game primarily on Frotz.
+should run fine on any Z5 interpreter.  I built and debugged the game primarily on [Frotz](https://davidgriffith.gitlab.io/frotz/).
 
 
 ## Why can't I run the current version of the game on Frotz?
@@ -19,8 +19,8 @@ out the Vorple enhancements and compile your own for a vanilla experience.
 
 ## Compiling
 
-* Install Inform6
-* Install Vorple extensions
+* Install [Inform6](https://www.inform-fiction.org/)
+* Install [Vorple](https://vorple-if.com/) extensions
 
 Build:
 
