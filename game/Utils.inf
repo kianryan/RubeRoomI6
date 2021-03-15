@@ -6,6 +6,7 @@
         3: print "third";
         4: print "fourth";
         5: print "fifth";
+        6: print "sixth";
         default: print idx, "th";
     }
     rtrue;

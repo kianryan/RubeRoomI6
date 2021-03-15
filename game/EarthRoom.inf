@@ -4,7 +4,7 @@ PuzzleRoom earth_room "Southern Cavern"
         life.  Natural light floods in from a hole in the top of cavern, bringing a
         vibrancy to unexpected waves of colours in the room.  In the centre, a ring
         of boulders provides a convenient place to rest oneself while taking in the
-        spendlours of the plant life. ^^";
+        splendours of the plant life. ^^";
 
         print "The passage to the ";
         VorpleLinkCommand("north");
@@ -71,7 +71,7 @@ NPC troll "Rodin" earth_room
                 ^
                 'SAI MAI NAME UND I DIS-APP-EAR. WOT AM I?'^
                 ^
-                The troll carefully rolls up the parcement again and
+                The troll carefully rolls up the parchment again and
                 keeps careful hold of it.";
             Answer:
                 if (~~(self.greeted)) "U RUDE."; ! don't be rude.
@@ -87,7 +87,7 @@ NPC troll "Rodin" earth_room
                     earth_room.win_room();
                     rtrue;
                 } else {
-                    "The troll looks at you quizzacly, but nothing happens.";
+                    "The troll looks at you quizzically, but nothing happens.";
                 }
            ],
     with long_intro true,

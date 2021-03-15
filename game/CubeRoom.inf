@@ -35,8 +35,8 @@ PuzzleRoom cube_room "The Atrium"
             VorpleLinkCommand("east");
             print " and ";
             VorpleLinkCommand("west");
-            new_line;
-        ],
+            print ".^";
+       ],
         win_description
         [;
             print
@@ -48,7 +48,7 @@ PuzzleRoom cube_room "The Atrium"
                 Tracing the lines you follow it around to the east side.^^
 
                 On the east side at the very top you just catch the small brass boot wind up
-                and give the marble an almightly kick.  The marble fires off down the helter
+                and give the marble an almighty kick.  The marble fires off down the helter
                 skelter of tubing, building up more and more speed until it reaches the turn
                 to the south side. ^^
 
@@ -61,7 +61,7 @@ PuzzleRoom cube_room "The Atrium"
 
                 Following the cube round, as the water boils a thin jet of steam blows through the sails of
                 the little windmill.  As the windmill turns, the shaft below chops the
-                water in the tray causing the little boat to rhythmiclly bob up and down as it
+                water in the tray causing the little boat to rhythmically bob up and down as it
                 slowly makes it's way to the little shore at the end.^^
 
                 Finally the little boat reaches the shore, the whole machine slows to a halt, and
@@ -158,7 +158,7 @@ MachineFace north_face "North Face" cube_room
         chain of cogs, screws and cams winding their way to the east side of the cube.^",
         no_key "The north side has a small round hole in the very centre of the cube.
                 One cog lines up close to the hole, with a number interfacing to a series
-                of screws cogs, and cams winding their way to the east side of the cube.^";
+                of screws cogs, and cams winding their way to the east side of the cube.";
 
 MachineFace east_face "East Face" cube_room
    with name 'east' 'face' 'side' 'cube',
@@ -174,7 +174,7 @@ MachineFace east_face "East Face" cube_room
                 tube is completely flat with a hole at the beginning.  What appears to
                 be a tiny metal boot is lined up with the start of the tube, connected
                 to the gears coming from the north side.  The bottom of the tube turns
-                on to the south side.^";
+                on to the south side.";
 
 MachineFace south_face "South Face" cube_room
     with name 'south' 'face' 'side' 'cube',
@@ -185,14 +185,14 @@ MachineFace south_face "South Face" cube_room
                 the spindle are packed with dried straw.  Above the spindle is a spiral
                 of beautifully blown glass open at the top end, standing upright.  Water
                 sits inside the spiral.  At the top of the glass spiral, the glass tubing
-                turns straight and turns on the west side.^",
+                turns straight and turns on the west side.",
         no_key "On the south side the tube continues on the lower half of the machine.
                 There's a small opening at the mid way point of the tube, and a spindle
                 just above the opening to attach something to. Small steel cages around
                 the spindle are packed with dried straw.  Above the spindle is a spiral
                 of beautifully blown glass open at the top end, standing upright.  Water
                 sits inside the spiral.  At the top of the glass spiral, the glass tubing
-                turns straight and turns on the west side.^";
+                turns straight and turns on the west side.";
 
 MachineFace west_face "West Face" cube_room
     with name 'west' 'face' 'side' 'cube',
@@ -202,9 +202,9 @@ MachineFace west_face "West Face" cube_room
                 reach and a single shaft extends down into a tub of water at the bottom.
                 There's a platform at the end of the tub of water, and the sides are
                 extended to quite a height.  You've dropped the small wooden boat
-                in the little lake, it bobs away merrily.^",
+                in the little lake, it bobs away merrily.",
         no_key "On the west side the glass tubing stops suddenly before a tiny
                 gold windmill.  The windmill is at the very top of the cube out of your
                 reach and a single shaft extends down into a tub of water at the bottom.
                 There's a platform at the end of the tub of water, and the sides are
-                extended to quite a height.  You can't reach in to the water in the tub.^";
+                extended to quite a height.  You can't reach in to the water in the tub.";

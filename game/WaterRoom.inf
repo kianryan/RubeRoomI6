@@ -9,14 +9,14 @@ PuzzleRoom water_room "Eastern Cavern"
             print "below.^^";
             print "The passage to the ";
             VorpleLinkCommand("west");
-            print_ret " leads back to the atrium.^^";
+            print_ret " leads back to the atrium.";
         ]
    with win_description
     [;
         move water_key to water_room;
         "The scale wobbles for a few seconds and eventually settles perfectly balanced.  ^^
         You can feel through the ground something hidden move, and then a small wooden
-        sailboat floats out across the rockpool and lands on the shore.";
+        sailboat floats out across the rock pool and lands on the shore.";
     ],
     w_to cube_room;
 
@@ -24,7 +24,7 @@ Prop waterfall "Waterfall" water_room
     with name 'waterfall'
     with description
         "The water is coming from between the rocks in the darkness above
-        and drops with a roaring flourish.  It's forcefull, but has an elegant
+        and drops with a roaring flourish.  It's forceful, but has an elegant
         calm to it.";
 
 Attribute fillable; ! A container that can be filled

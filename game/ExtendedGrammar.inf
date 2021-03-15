@@ -38,7 +38,7 @@ Verb 'pour' 'spill'
     * noun -> Pour;
 
 [SnuffSub;
-    print_ret "Well, that doesn't need extinguising.";
+    print_ret "Well, that doesn't need extinguishing.";
 ];
 
 Verb 'snuff' 'extinguish' 'put out' 'douse'
@@ -100,9 +100,20 @@ Verb 'talk' 't//' 'converse' 'chat' 'gossip'
 
 [HTMLInventorySub i;
 	if (IsVorpleSupported()) {
-		L__M(##Inv, 2);     ! for 6/11 and 6/12 compatibility
-		print ":^";
+		! L__M(##Inv, 2);     ! for 6/11 and 6/12 compatibility
+
+        VorpleTooltipMouse("You pat your pockets and find:^", "Items in your inventory can be manipulated.  Try different
+                        verbs with items you've picked up.");
+
+        if (child(player) == nothing) {
+            ! VorpleOpenHtmlTag("p");
+            print " nothing.";
+            ! VorpleCloseHTMLTag();
+        }
+
+        VorpleOpenHtmlTag("ul", "inv");
 		objectloop (i in player) {
+                        VorpleOpenHtmlTag("li");
                         ! Create the examine command.
                         bp_output_stream(3, examineCommand, 300);
                         VorpleAttributeFlags = false;
@@ -118,9 +129,9 @@ Verb 'talk' 't//' 'converse' 'chat' 'gossip'
                         bp_output_stream(-3);
 
                         VorpleLinkCommandText(examineCommand, objectName);
-                        new_line;
+                        VorpleCloseHTMLTag();
 		}
-        new_line;
+        VorpleCloseHTMLTag();
 	}
 	else { <<Inv>>; }
 ];
@@ -162,9 +173,9 @@ Extend 'inventory' first
     VorpleLinkCommandText("south", "SOUTH");
     print ", ";
     VorpleLinkCommandText("east", "EAST");
-    print "and ";
+    print " and ";
     VorpleLinkCommandText("west", "WEST");
-    print ".  Each room descriptoin will tell you where you can move to.";
+    print ".  Each room description will tell you where you can move to.";
     VorpleCloseHTMLTag();
    VorpleOpenHtmlTag("p");
     print "The game is a collection of puzzles, that will require some experimentation to solve.  There's a range of puzzle

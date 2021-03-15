@@ -36,7 +36,7 @@ PuzzleRoom fire_room "Northern Cavern"
             room are five lanterns in a line.^^";
             print "The passage to the ";
             VorpleLinkCommand("south");
-            print_ret " leads back to the atrium.^^";
+            print_ret " leads back to the atrium.";
         ],
         win_description
         [;
@@ -99,13 +99,14 @@ Class Lantern
 Lantern lantern1 fire_room
     with name 'first',
     with index 1,
-    with left lantern5,
+    with left lantern6,
     with right lantern2;
 Lantern lantern2 fire_room
     with name 'second',
     with index 2,
     with left lantern1,
     with right lantern3;
+    ! has light;
 Lantern lantern3  fire_room
     with name 'third',
     with index 3,
@@ -115,25 +116,32 @@ Lantern lantern4 fire_room
     with name 'fourth',
     with index 4,
     with left lantern3,
-    with right lantern5,
-    has light;
+    with right lantern5;
+    ! has light;
 Lantern lantern5 fire_room
     with name 'fifth',
     with index 5,
     with left lantern4,
-    with right lantern1,
-    has light;
+    with right lantern6;
+    ! has light;
+Lantern lantern6 fire_room
+    with name 'sixth',
+    with index 6,
+    with left lantern5,
+    with right lantern1;
+    ! has light;
+
 
 ! Magic match depends on if it's being held.
 ! It will not burn the user, but whilst being held, it will always be lit.
 Object match "match" fire_room
     with name 'match',
     with description
-        "It's a match.";
+        "A small wooden match which eternally produces fire.  The match is already lit, does not burn it's
+        stick is not warm to the touch, but somehow, keeps a flame.";
 
 Object snuff "snuff" fire_room
     with name 'snuff' 'hood',
     with description
-        "A plain brass snuff, with a long handle, used for extingusing lights.  The inside of the hood
-        is sooted from use.";
-
+        "A plain brass snuff, with a long handle, used for extinguishing lights.  The inside of the hood
+        is blackened from use.";
