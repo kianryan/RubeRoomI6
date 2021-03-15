@@ -53,7 +53,6 @@ blockquote {
     z-index: 999999;
 }
 
-
 /* Hide default Inform 7 template elements */
 
 body.play > div.interpretercredit {
@@ -400,6 +399,11 @@ nav.game-nav ul li a {
         margin: 0 0.5rem;;
         display: inline-block;
     }
+
+    .pull-right {
+        float: right;
+        margin-right: 10px;
+    }
 }
 
 @media screen and (min-width: 1000px) {
@@ -412,7 +416,6 @@ nav.game-nav ul li a {
         box-shadow: 5px 5px 5px var(--main-bg-color);
         width: 10rem;
     }
-
 
 }
 
@@ -444,4 +447,3 @@ a, a:link, a:visited {
     color: var(--main-color);
     text-decoration: underline;
 }
-
