@@ -192,12 +192,12 @@ Extend 'inventory' first
 Verb 'help'
     * -> Help;
 
-[CheatSub;
-    move player to middle_room;
-];
+! [CheatSub;
+!     move player to middle_room;
+! ];
 
-Verb 'cheat'
-    * -> Cheat;
+! Verb 'cheat'
+!     * -> Cheat;
 
 
 [ NewEndPrompt ;

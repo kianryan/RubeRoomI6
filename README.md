@@ -2,7 +2,7 @@
 
 An interactive fiction project using Inform6 and Vorple.
 
-You can play the game here: 
+You can play the game [here](https://icy-sky-03dc70b03.azurestaticapps.net/).
 
 ## Running The Game
 
