@@ -48,9 +48,9 @@ Global beforefirstcommand = 1;
 ! AfterPrompt is a I6 lib that gets called right after the prompt is displayed; put your
 !    prompt tooltips there!
 [ AfterPrompt ;
-	if (beforefirstcommand) { beforefirstcommand = 0; VorpleTooltipPrompt("Type or click a command to play."); }
+	if (beforefirstcommand) { beforefirstcommand = 0; VorpleTooltipPrompt("Type or click a command to play.  Help is available at any time with HELP."); }
 	if (VorpleParserError == 1) {
-		VorpleTooltipPrompt("A list of common commands is available at the top of the page, or try typing actions.  A more comprehensive explination is availble via HELP.");
+		VorpleTooltipPrompt("A list of common commands is available at the top of the page, or try typing actions.  A more comprehensive explanation is available via HELP.");
 		VorpleParserError=0;
 	}
 ];
