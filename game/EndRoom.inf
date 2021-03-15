@@ -25,7 +25,7 @@ Room end_room "The outside"
             "As you emerge from the end of the cavern, the sun beats down warmly on
             your face.  You've been in the dark for such a long time that your eyes
             ache with the change in light and for a brief time you consider
-            retreating to the dark caves.  When you've adjusted, and can see clearnly again
+            retreating to the dark caves.  When you've adjusted, and can see clearly again
             you take a drink from a nearby stream and contemplate what's next now that
             little adventure is over.^^",
             deadflag = 2;

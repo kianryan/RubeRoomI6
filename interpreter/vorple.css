@@ -1,7 +1,30 @@
+:root {
+    --main-bg-color: #282828;
+    --main-color: #66ff66;
+    --dark-main-color: #3e9c3e;
+}
+
 html,
 body,
 input {
-    font-family: Roboto, sans-serif;
+    /* font-family: Roboto, sans-serif; */
+    font-family: 'IBM Plex Mono', monospace;
+    background: black;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--main-color);
+    text-shadow: 0 0 5px var(--dark-main-color);
+}
+
+body {
+
+    /* background: var(--main-bg-color); */
+
+    background: linear-gradient(
+        var(--main-bg-color),
+        black
+    );
+
 }
 
 a, a:visited {
@@ -9,7 +32,7 @@ a, a:visited {
 }
 
 blockquote {
-    border: 1px solid #ccc;
+    border: 1px solid var(--dark-main-color);
     padding: 0.5em 1em;
 }
 
@@ -54,11 +77,11 @@ body.play > div.interpretercredit {
 
 /* the following two are specified by the Haven interpreter but are unused in Vorple at the moment */
 .font-proportional {
-    font-family: "Roboto", serif;
+    font-family: "IBM Plex Mono", serif;
 }
 
 .font-fixed-width {
-    font-family: "Roboto Mono", monospace;
+    font-family: "IBM Plex Mono", monospace;
 }
 
 
@@ -85,7 +108,7 @@ body.play > div.interpretercredit {
 }
 
 .monospace-font {
-    font-family: "Roboto Mono", monospace;
+    font-family: "IBM Plex Mono", monospace;
 }
 
 #output span.nowrap-font,
@@ -337,6 +360,7 @@ body .vex.vex-theme-plain .vex-content {
 #powerTip {
     max-width: 90%;
     white-space: pre-wrap;
+    background: var(--dark-main-color);
 }
 
 
@@ -344,6 +368,7 @@ body .vex.vex-theme-plain .vex-content {
 
 /* nav.game-nav ul {
 } */
+
 
 nav.game-nav ul {
     list-style-type: none;
@@ -362,9 +387,9 @@ nav.game-nav ul li a {
         left: 0;
         right: 0;
         height: 3rem;
-        background-color: white;
+        background-color: var(--main-bg-color);
         border: 1px solid black;
-        box-shadow: 5px 5px 5px lightgrey;
+        box-shadow: 5px 5px 5px var(--main-bg-color);
     }
 
     nav.game-nav ul {
@@ -382,9 +407,9 @@ nav.game-nav ul li a {
         position: fixed;
         left: 30px;
         top: 30px;
-        background-color: white;
+        background-color: var(--main-bg-color);
         border: 1px solid black;
-        box-shadow: 5px 5px 5px lightgrey;
+        box-shadow: 5px 5px 5px var(--main-bg-color);
         width: 10rem;
     }
 
@@ -404,5 +429,19 @@ nav.game-nav ul li a {
     }
 
 
+}
+
+#lineinput {
+    margin-top: .5rem;
+}
+
+#lineinput-prefix {
+    background-color: inherit;
+    color: inherit;
+}
+
+a, a:link, a:visited {
+    color: var(--main-color);
+    text-decoration: underline;
 }
 

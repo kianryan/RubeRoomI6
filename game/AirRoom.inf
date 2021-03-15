@@ -24,7 +24,7 @@ PuzzleRoom air_room "Western Cavern"
             VorpleLinkCommandText("examine rushes", "rushes");
             print " is growing from between the crack and gently rocks in the breeze emanating from the ";
             VorpleLinkCommandText("examine gap", "gap");
-            print (".");
+            print ".";
             new_line;
             new_line;
             print "The passage to the ";

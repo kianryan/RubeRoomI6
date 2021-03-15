@@ -15,10 +15,16 @@ Global VorpleAttributeFlags = true;		! do we need a tooltip on the prompt
 Include "vorple.h";
 Include "Parser";
 
+Object LibraryMessages
+	with before [;
+		Miscellany: if (lm_n == 5) { print ""; NewEndPrompt(); rtrue; } ! replace the final message
+	];
+
 Replace FillSub;
 Replace CutSub;
 Replace BlowSub;
 Replace WriteListR;
+Replace QuitSub;
 Include "VerbLib";
 Include ">WriteListFromVorple";
 

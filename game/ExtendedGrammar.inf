@@ -191,3 +191,38 @@ Extend 'inventory' first
 
 Verb 'help'
     * -> Help;
+
+[CheatSub;
+    move player to middle_room;
+];
+
+Verb 'cheat'
+    * -> Cheat;
+
+
+[ NewEndPrompt ;
+	print "^Would you like to ";
+	VorpleLinkCommand("RESTART");
+	print ", ";
+	VorpleLinkCommand("RESTORE");	print " a saved game";
+	#Ifdef DEATH_MENTION_UNDO;
+	print ", ";
+	VorpleLinkCommand("UNDO");
+	print " your last move";
+	#Endif;
+	if (TASKS_PROVIDED == 0) {
+		print ", give the "; VorpleLinkCommand("FULL"); print " score for that game";
+	}
+	if (deadflag == 2 && AMUSING_PROVIDED == 0) {
+		print ", see some suggestions for "; VorpleLinkCommand("AMUSING"); print " things to do";
+	}
+        print " or "; VorpleLinkWebsiteText("https://github.com/kianryan/RubeRoomI6", "QUIT"); "?";
+];
+
+[ QuitSub; L__M(##Quit,2);
+    VorpleLinkCommand("YES");
+    print " ";
+    VorpleLinkCommand("NO");
+    if (YesOrNo()~=0)
+    VorpleExecuteJavaScriptCommand("window.location.href='https://github.com/kianryan/RubeRoomI6'");
+];
